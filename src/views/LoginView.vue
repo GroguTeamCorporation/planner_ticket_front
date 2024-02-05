@@ -4,6 +4,6 @@
 
 <template>
   <main>
-<h2>esta es HOMeee</h2>
+<h2>esta es Loginnnnn</h2>
   </main>
 </template>
