@@ -13,7 +13,7 @@
                 <button  class="login-button" type="submit">Iniciar sesion</button>
             </form>
             <div class="additional">
-              <p>¿No eres usuario? <router-link to="/registro">Regístrate</router-link></p>
+              <p>¿No eres usuario? <router-link to="/register">Regístrate</router-link></p>
         <p>¿Olvidaste la contraseña? <a href="#">Haz clic aquí</a></p>
             </div>
       </div>
