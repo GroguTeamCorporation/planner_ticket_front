@@ -3,7 +3,7 @@
         <div class="login-container">
             <img class="logo" :src="'/src/assets/images/logo 1.png'">
         
-            <form class="login-form" @submit.prevent="login">
+            <form class="login-form" @submit.prevent= "login">
                 <label for="username">User:</label>
                 <input class="input-field" type="text" v-model="username" required>
                 
@@ -13,14 +13,15 @@
                 <button  class="login-button" type="submit">Iniciar sesion</button>
             </form>
             <div class="additional">
-              <p>¿No eres usuario? <router-link to="/register">Regístrate</router-link></p>
-        <p>¿Olvidaste la contraseña? <a href="#">Haz clic aquí</a></p>
+              <p>¿No eres usuario? <router-link to="/register">REGISTRATE</router-link></p>
+        <p>¿Olvidaste la contraseña? <a href="#">HAZ CLICK AQUI</a></p>
             </div>
       </div>
     </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -48,6 +49,15 @@ export default {
 };
 </script>
 <style scoped>
+
+@font-face{
+  font-family: 'fuente';
+  src:url('../assets/fonts/Peralta-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 #main-container {
   background-image: url('/src/assets/images/fondo-loginview.png');
   background-size: cover;
@@ -83,6 +93,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding:20px ;
+  
 }
 
 .input-field {
@@ -90,6 +101,7 @@ export default {
   padding: 8px;
   border: 2px solid #2a5381;
   border-radius: 6px;
+  
 }
 
 .login-button {
@@ -103,6 +115,7 @@ export default {
   margin-left: 35%;
   margin-top: 5%;
   transition: 0.3s;
+  font-family: 'fuente' ;
 }
 
 .login-button:hover {
@@ -112,17 +125,21 @@ export default {
 .additional {
   margin-top: 20px;
   text-align: center;
+  
 }
 
 .additional p {
   margin: 5px 0;
   color: whitesmoke;
+  
+  
 }
 
 .additional a {
   color: #4295e2;
   text-decoration: underline;
   cursor: pointer;
+  font-family: 'fuente';
 }
 
 </style>
