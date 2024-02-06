@@ -9,7 +9,7 @@ export const useEventsStore = defineStore({
   id: 'eventsStore',
   state: () => ({
     allEvents: [] as Event[],
-    itemsPerPage: 4,
+    itemsPerPage: 3,
     currentPage: 1,
     lastFetchTime: 0,
   }),

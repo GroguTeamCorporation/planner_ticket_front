@@ -9,3 +9,12 @@ import FakeCardEvents from "../components/Home/FakeCardEvents.vue";
 <FakeCardEvents/>
   </main>
 </template>
+<style type="text/css">
+
+main{
+  background-image: url(/src/assets/img/concert6.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+</style>
