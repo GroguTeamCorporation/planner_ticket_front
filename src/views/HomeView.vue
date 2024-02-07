@@ -1,9 +1,7 @@
 <script setup lang="ts">
-
+   
 </script>
 
 <template>
-  <main>
-<h2>esta es HOMeee</h2>
-  </main>
+    
 </template>
