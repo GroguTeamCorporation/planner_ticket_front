@@ -12,7 +12,7 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
-            <img src="../assets/img/Oreja_van_gogh.jpg" class="d-block w-100" alt="...">
+            <img src="../assets/img/Oreja_van_gogh.jpg" class="d-block w-100" alt="Oreja de Van Gogh" >
             <div class="carousel-caption d-none d-md-block">
                 <h5>LA OREJA DE VAN GOGH</h5>
                     <p class="container-p">Próximamente 10 de Febrero 2024<br>
@@ -23,22 +23,28 @@
             <div class="carousel-item" data-bs-interval="2000">
             <img src="../assets/img/pimpinela.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+                <h5>PIMPINELA</h5>
+                    <p class="container-p">Próximamente 17 de Agosto 2024<br>
+                        <i class="bi bi-pin-map-fill p-3"></i>Luarca
+                    </p> 
             </div>
             </div>
             <div class="carousel-item">
             <img src="../assets/img/hombres-g.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+                <h5>LOS HOMBRES G</h5>
+                    <p class="container-p">Próximamente 23 de Agosto 2024<br>
+                        <i class="bi bi-pin-map-fill p-3"></i>Avilés
+                    </p>
             </div>
             </div>
             <div class="carousel-item">
             <img src="../assets/img/los-suaves.jpeg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+                <h5>LOS SUAVES</h5>
+                    <p class="container-p">Próximamente 12 de Noviembre 2024<br>
+                        <i class="bi bi-pin-map-fill p-3"></i>León
+                    </p>
             </div>
             </div>
         </div>
