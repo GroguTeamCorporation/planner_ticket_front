@@ -2,7 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router';
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
-import Slider from './components/Slider.vue';
+
 
 </script>
 
@@ -10,7 +10,7 @@ import Slider from './components/Slider.vue';
   <header>
     <Navbar/>
   </header>
-    <Slider/>
+   
   <footer>
     <Footer/>
   </footer>
