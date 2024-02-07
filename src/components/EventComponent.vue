@@ -86,12 +86,6 @@
     image: null, 
   });
   
-/*   const addEvent = () => {
-  // Implementa la lógica para agregar el evento, incluido el manejo de la imagen
-  // Después, cierra el modal y actualiza la lista de eventos (si es necesario)
-  console.log('Evento agregado:', formData.value);
-  clearForm(); // Limpia el formulario después de agregar el evento
-}; */
 
 
 /* const addEvent = async () => {
@@ -99,23 +93,20 @@
     const response = await axios.post('http://localhost:8080/api/v1/events', formData.value);
     if (response.status === 200) {
       console.log('Evento agregado con éxito:', response.data);
-      sendAddList(response.data); // Aquí pasamos el ID del evento al añadirlo con éxito
+      sendAddList(response.data); // pasar ID del evento al añadirlo
     } else {
       console.error('Error al agregar el evento:', response.data.error);
-      // Maneja el error de acuerdo a tus necesidades.
     }
     closeModal();
     clearForm();
   } catch (error: any) {
     console.error('Error al enviar los datos al servidor:', error.message);
-    // Maneja el error de conexión o cualquier otro error que pueda ocurrir.
   }
 };
  */
 
  const addEvent = async () => {
   try {
-    // Realiza la solicitud POST con formData.value
     const response = await axios.post('http://localhost:8080/api/v1/events', formData.value);
 
     if (response.status === 200) {
@@ -133,7 +124,7 @@
 
       console.log('Evento agregado con éxito:', newEvent);
 
-      // fALTA actualizar lista de eventos
+      // FALTA actualizar lista de eventos
     } else {
       console.error('Error al agregar el evento:', response.data.error);      
     }
@@ -145,26 +136,31 @@
   }
 };
 
+// No desaparece modal al guardar ***** PRUEBAS ****
+//************************************************/
+
 /* const closeModal = () => {
     $('#exampleModal').modal('hide');  
 };
- */
+*/
+
  const closeModal = () => {
   const modal = document.getElementById('exampleModal');
   if (modal) {
-    modal.classList.remove('show'); // Oculta el modal
-    modal.style.display = 'none'; // Opcional: oculta el modal completamente
+    modal.classList.remove('show'); 
+    modal.style.display = 'none'; 
   }
 };
+ 
   
   const handleImageChange = (event) => {
-  // Aquí puedes manejar la lógica para almacenar la imagen en formData.image
+  // lógica para almacenar la imagen en formData.image
   console.log('Imagen seleccionada:', event.target.files[0]);
   formData.value.image = event.target.files[0];
 };
 
 const sendAddList = (event: Event) => {
-  // Puedes realizar alguna acción con el evento aquí.
+ 
   console.log(`Añadiendo evento a la lista con ID: ${event.id}`);
 };
 
@@ -181,7 +177,6 @@ console.log('Imagen seleccionada:', formData.image);
 
 
   const clearForm = () => {
-  // Limpia el formulario
   formData.value.title = '';
   formData.value.date = '';
   formData.value.time = '';
