@@ -4,7 +4,7 @@ import CardEvents from "../components/Home/CardEvents.vue";
 
 <template>
   <main>
-<h2>esta es HOMeee</h2>
+
 
 <CardEvents/>
   </main>
@@ -13,7 +13,7 @@ import CardEvents from "../components/Home/CardEvents.vue";
 
 main{
   background-image: url(/src/assets/img/concert6.jpg);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 
 }

@@ -18,7 +18,7 @@ interface Event {
 
  
 const allEvents = ref<Event[]>([]);
-const itemsPerPage = 4;
+const itemsPerPage = 3;
 const currentPage = ref(1);
 const pages = computed(() => Math.ceil(allEvents.value.length / itemsPerPage));
 const router = useRouter();
@@ -35,9 +35,6 @@ const fetchEvents = async () => {
  allEvents.value = response.data;
  console.log(response.data);
 };
-
-
-
 
 
 
