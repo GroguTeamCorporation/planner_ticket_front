@@ -13,7 +13,7 @@
         <label class="label" for="password">Contraseña:</label>
         <input class="input-field" type="password" v-model="password" required>
 
-        <button class="login-button" type="submit">Registrarse</button>
+        <button class="login-button" type="submit">Aceptar</button>
       </form>
 
      
