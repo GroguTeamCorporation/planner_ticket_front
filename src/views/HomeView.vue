@@ -1,9 +1,7 @@
 <script setup lang="ts">
-
+  import Slider from '../components/Slider.vue';
 </script>
 
 <template>
-  <main>
-<h2>esta es HOMeee</h2>
-  </main>
+  <Slider/>
 </template>
