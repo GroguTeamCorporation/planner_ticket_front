@@ -4,10 +4,10 @@
             <img class="logo" :src="'/src/assets/images/logo 1.png'">
         
             <form class="login-form" @submit.prevent= "login">
-                <label for="username">User:</label>
+                <label class="label" for="username">User:</label>
                 <input class="input-field" type="text" v-model="username" required>
                 
-                <label for="password">Password:</label>
+                <label class="label" for="password">Password:</label>
                 <input class="input-field" type="password" v-model="password" required>
                 
                 <button  class="login-button" type="submit">Iniciar sesion</button>
@@ -140,6 +140,9 @@ export default {
   text-decoration: underline;
   cursor: pointer;
   font-family: 'fuente';
+}
+.label {
+  color: whitesmoke;
 }
 
 </style>
