@@ -49,7 +49,9 @@
     
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-danger" @click="clearForm">Borrar</button>
-                <button type="submit" class="btn btn-primary">Añadir</button>
+                <button type="submit" class="btn btn-primary" @click="() => sendAddList(response.data.id)">Añadir</button>
+
+
             </form>
           </div>
         </div>
@@ -60,6 +62,8 @@
   <script setup lang="ts">
   import axios from 'axios';
   import { ref, type Ref } from 'vue';
+  //import type { Event as BackendEvent } from "../interfaces/EventInterface";
+  import type { Event} from '@/interfaces/EventInterface';
 
   interface FormData {
 
@@ -90,21 +94,54 @@
 }; */
 
 
-const addEvent = async () => {
+/* const addEvent = async () => {
   try {
     const response = await axios.post('http://localhost:8080/api/v1/events', formData.value);
     if (response.status === 200) {
       console.log('Evento agregado con éxito:', response.data);
-      // Aquí puedes realizar acciones adicionales, como actualizar la lista de eventos.
+      sendAddList(response.data); // Aquí pasamos el ID del evento al añadirlo con éxito
     } else {
       console.error('Error al agregar el evento:', response.data.error);
       // Maneja el error de acuerdo a tus necesidades.
     }
     closeModal();
     clearForm();
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error al enviar los datos al servidor:', error.message);
     // Maneja el error de conexión o cualquier otro error que pueda ocurrir.
+  }
+};
+ */
+
+ const addEvent = async () => {
+  try {
+    // Realiza la solicitud POST con formData.value
+    const response = await axios.post('http://localhost:8080/api/v1/events', formData.value);
+
+    if (response.status === 200) {
+      // Mapea el evento del backend a la interfaz Event
+      const newEvent: Event = {
+        id: response.data.id,
+        title: response.data.title,
+        date_event: response.data.date_event,
+        time_event: response.data.time_event,
+        capacity: response.data.capacity,
+        description: response.data.description,
+        location: '', // Puedes asignar un valor por defecto o dejarlo vacío si no está presente en la respuesta
+        image: response.data.image,
+      };
+
+      console.log('Evento agregado con éxito:', newEvent);
+
+      // fALTA actualizar lista de eventos
+    } else {
+      console.error('Error al agregar el evento:', response.data.error);      
+    }
+
+    closeModal();
+    clearForm();
+  } catch (error: any) {
+    console.error('Error al enviar los datos al servidor:', error.message);
   }
 };
 
@@ -125,6 +162,13 @@ const addEvent = async () => {
   console.log('Imagen seleccionada:', event.target.files[0]);
   formData.value.image = event.target.files[0];
 };
+
+const sendAddList = (event: Event) => {
+  // Puedes realizar alguna acción con el evento aquí.
+  console.log(`Añadiendo evento a la lista con ID: ${event.id}`);
+};
+
+
 
 /* const handleImageChange = (event: Event) => {
 // Manejar el cambio de la imagen
