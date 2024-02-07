@@ -1,25 +1,65 @@
 <script setup lang="ts">
-import { useEventsStore } from '../../stores/eventsStore';
+
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+import axios from 'axios';
+
+interface Event {
+    id: number;
+    title: string;
+    description: string;
+    location: string;
+    capacity: string;
+    date_event: string;
+    time_event: string;
+    image: string;
+   }
+
+ 
+const allEvents = ref<Event[]>([]);
+const itemsPerPage = 4;
+const currentPage = ref(1);
+const pages = computed(() => Math.ceil(allEvents.value.length / itemsPerPage));
+const router = useRouter();
+
+
+const changePage = (page: number) => {
+ if (page >= 1 && page <= pages.value) {
+   currentPage.value = page;
+ }
+}
+
+const fetchEvents = async () => {
+ const response = await axios.get("http://localhost:8080/api/v1/events");
+ allEvents.value = response.data;
+ console.log(response.data);
+};
 
 
 
-const { currentPage, changePage, pages } = useEventsStore();
-const eventsStore = useEventsStore();
+
+
+
+
+
+
+fetchEvents();
 
 const sendAddList = (id: any) => {
-  eventsStore.navigateToLogin(id);
+  
 };
 </script>
 
    
 
 
-</script>
 <template>
 
   <div class="events">
     <div class="events-cards">
-        <div v-for="(event, index) in eventsStore.paginatedEvents" :key="event.id" class="event-card">
+      <div v-for="(event, index) in allEvents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)"
+        :key="event.id" class="event-card">
         <img :src="event.image" :alt="event.title">
         <div class="info-card">
           <h3>{{ event.title }}</h3>
@@ -52,4 +92,51 @@ const sendAddList = (id: any) => {
 </template>
 
 <style lang="scss">
+
+.events{
+height: 60%;
+.events-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    color:white;
+    font-size:1rem;
+ .event-card {
+    font-size:1rem;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+    background-color: rgba(0,  0,  0,  0.8); 
+    
+    max-width: 18rem;
+    font-size: 100%;
+ 
+   img {
+     width: 15rem;
+     height: 10rem;
+     cursor: pointer;
+    
+   }
+   .info-card{
+   
+       padding:1rem;
+       margin:-1rem;
+       margin-top: 1rem;
+       button{
+        
+           font-size:1rem;
+           display: inline-block;
+           position: relative;
+           margin-left: 10rem;
+       }
+   }
+   
+
+ }
+}}
+.page{
+    margin-bottom: 10rem;
+    margin-top: 1rem;
+   }
 </style>

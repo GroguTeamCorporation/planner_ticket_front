@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import FakeCardEvents from "../components/Home/FakeCardEvents.vue";
+import CardEvents from "../components/Home/CardEvents.vue";
 </script>
 
 <template>
   <main>
 <h2>esta es HOMeee</h2>
 
-<FakeCardEvents/>
+<CardEvents/>
   </main>
 </template>
 <style type="text/css">

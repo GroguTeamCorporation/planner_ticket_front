@@ -1,4 +1,4 @@
-// eventsStore.ts
+
 import { defineStore } from 'pinia';
 import type { Event } from '@/interfaces/EventInterface';
 
@@ -9,24 +9,9 @@ export const useEventsStore = defineStore({
   id: 'eventsStore',
   state: () => ({
     allEvents: [] as Event[],
-    itemsPerPage: 3,
-    currentPage: 1,
     lastFetchTime: 0,
   }),
-  getters: {
-    pages: (state) => Math.ceil(state.allEvents.length / state.itemsPerPage),
-    paginatedEvents: (state) => {
-      const startIndex = (state.currentPage - 1) * state.itemsPerPage;
-      const endIndex = startIndex + state.itemsPerPage;
-      return state.allEvents.slice(startIndex, endIndex);
-    },
-  },
   actions: {
-    changePage(page: number) {
-      if (page >= 1 && page <= this.pages) {
-        this.currentPage = page;
-      }
-    },
     async fetchEvents() {
       const tenMinutesInMilliseconds = 10 * 60 * 1000;
       const now = Date.now();
