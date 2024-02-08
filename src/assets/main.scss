@@ -1,1 +1,19 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
 @import './base.scss';
+
+
+body{
+    h1,
+    h2,
+    h3 {
+        font-family: "Peralta", serif;
+    }
+    p,
+    input,
+    label,
+    h4,
+    a {
+        font-family: "Peralta", serif;
+    }
+}
