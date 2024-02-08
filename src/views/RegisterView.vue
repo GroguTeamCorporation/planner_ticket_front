@@ -111,11 +111,11 @@ export default {
 @media screen and (max-width: 600px) {
   .logo {
     width: 40%;
-    margin-top: 10%;
+    margin-top: 20%;
   }
   .login-container{
     width: 80%;
-    margin-top: 10%;
+    margin-top: 25%;
   }
   .login-form{
     padding: 1px;
