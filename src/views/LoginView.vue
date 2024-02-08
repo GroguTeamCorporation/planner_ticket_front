@@ -78,9 +78,8 @@ export default {
 
   width: 450px;
   height: 520px;
-  margin:25%;
+  margin:auto;
   margin-top: 12%;
-  margin-left: 38%;
   padding: 5px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(250, 247, 247, 0.1);
@@ -143,6 +142,27 @@ export default {
 }
 .label {
   color: whitesmoke;
+}
+@media screen and (max-width: 600px) {
+  .logo {
+    width: 40%;
+    margin-top: 10%;
+  }
+  .login-container{
+    width: 80%;
+    margin-top: 10%;
+  }
+  .login-form{
+    padding: 1px;
+  }
+  .input-field{
+    margin-bottom: 15px;
+  }
+  .login-button{
+    width: 70%;
+    margin-left: 10%;
+  }
+
 }
 
 </style>
