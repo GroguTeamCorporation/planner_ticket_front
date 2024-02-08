@@ -50,7 +50,6 @@ const sendAddList = (id: any) => {
 
    
 
-
 <template>
 
   <div class="events">
