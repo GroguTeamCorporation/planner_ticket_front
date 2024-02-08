@@ -150,7 +150,7 @@ export default {
   }
   .login-container{
     width: 80%;
-    margin-top: 10%;
+    margin-top: 20%;
   }
   .login-form{
     padding: 1px;
