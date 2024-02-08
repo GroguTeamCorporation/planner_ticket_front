@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="location" class="form-label">Localización</label>
+                    <label for="location" class="form-label">Ubicación</label>
                     <input v-model="formData.location" type="text" class="form-control" id="location" required>
                 </div>
 
@@ -49,9 +49,9 @@
     
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-danger" @click="clearForm">Borrar</button>
-                <button type="submit" class="btn btn-primary" @click="() => sendAddList(response.data.id)">Añadir</button>
-
-
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <!-- <button type="submit" class="btn btn-primary" @click="() => sendAddList(response.data.)">Guardar</button> -->
+                <!-- <button type="submit" class="btn btn-primary" @click="() => sendAddList(newEvent)">Guardar</button> -->
             </form>
           </div>
         </div>
@@ -60,6 +60,7 @@
   </template>
   
   <script setup lang="ts">
+  import $ from 'jquery';
   import axios from 'axios';
   import { ref, type Ref } from 'vue';
   //import type { Event as BackendEvent } from "../interfaces/EventInterface";
@@ -68,111 +69,93 @@
   interface FormData {
 
     title: string;
-    date: string;
-    time: string;
+    description: string;
     location: string;
     capacity: number;
-    description: string;
+    date: string;
+    time: string;
     image: File | null;
 }
   
   const formData: Ref<FormData> = ref({
     title: '',
-    date: '',
-    time: '',    
+    description: '',    
     location: '',
-    capacity: 0,
-    description: '',  
+    capacity: 0,   
+    date: '',
+    time: '',   
     image: null, 
   });
+
+  // Variable reactiva para almacenar la lista de eventos
+  const eventList = ref<Event[]>([]);
   
 
-
-/* const addEvent = async () => {
+const addEvent = async () => {
   try {
-    const response = await axios.post('http://localhost:8080/api/v1/events', formData.value);
-    if (response.status === 200) {
-      console.log('Evento agregado con éxito:', response.data);
-      sendAddList(response.data); // pasar ID del evento al añadirlo
-    } else {
-      console.error('Error al agregar el evento:', response.data.error);
-    }
-    closeModal();
-    clearForm();
-  } catch (error: any) {
-    console.error('Error al enviar los datos al servidor:', error.message);
-  }
-};
- */
-
- const addEvent = async () => {
-  try {
-    const response = await axios.post('http://localhost:8080/api/v1/events', formData.value);
+    const response = await axios.post('http://localhost:8080/api/v1/events', formData.value, {
+    });
 
     if (response.status === 200) {
-      // Mapea el evento del backend a la interfaz Event
       const newEvent: Event = {
         id: response.data.id,
         title: response.data.title,
+        description: response.data.description,
+        location: response.data.location,
+        capacity: response.data.capacity,
         date_event: response.data.date_event,
         time_event: response.data.time_event,
-        capacity: response.data.capacity,
-        description: response.data.description,
-        location: '', // Puedes asignar un valor por defecto o dejarlo vacío si no está presente en la respuesta
         image: response.data.image,
       };
 
       console.log('Evento agregado con éxito:', newEvent);
-
-      // FALTA actualizar lista de eventos
+      eventList.value.push(newEvent);
+      closeModal();
+      clearForm();
     } else {
-      console.error('Error al agregar el evento:', response.data.error);      
+      console.error('Error al agregar el evento:', response.data.error);
     }
-
-    closeModal();
-    clearForm();
   } catch (error: any) {
     console.error('Error al enviar los datos al servidor:', error.message);
   }
 };
 
+/* 
+const sendAddList = () => {
+  if (newEvent) {
+    console.log(`Añadiendo evento a la lista con ID: ${newEvent.id}`);
+    // Aquí deberías tener lógica para actualizar la lista de eventos y cerrar el modal
+  }
+}; */
+
+
 // No desaparece modal al guardar ***** PRUEBAS ****
 //************************************************/
 
-/* const closeModal = () => {
+const closeModal = () => {
     $('#exampleModal').modal('hide');  
 };
-*/
 
- const closeModal = () => {
+
+/*  const closeModal = () => {
   const modal = document.getElementById('exampleModal');
   if (modal) {
     modal.classList.remove('show'); 
     modal.style.display = 'none'; 
   }
 };
- 
+  */
   
-  const handleImageChange = (event) => {
+const handleImageChange = (event: any) => {
   // lógica para almacenar la imagen en formData.image
   console.log('Imagen seleccionada:', event.target.files[0]);
   formData.value.image = event.target.files[0];
 };
 
-const sendAddList = (event: Event) => {
+
+/* const sendAddList = (event: Event) => {
  
-  console.log(`Añadiendo evento a la lista con ID: ${event.id}`);
-};
-
-
-
-/* const handleImageChange = (event: Event) => {
-// Manejar el cambio de la imagen
-const target = event.target as HTMLInputElement;
-if (target.files) {
-formData.image = target.files[0];
-console.log('Imagen seleccionada:', formData.image);
-}
+  console.log(`Añadido evento a la lista con ID: ${event.id}`);
 }; */
 
 
