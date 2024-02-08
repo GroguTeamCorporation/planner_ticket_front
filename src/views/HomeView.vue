@@ -1,21 +1,13 @@
 <script setup lang="ts">
+import  Slider from '../components/Slider.vue'
 
-import  CardEvents from '../components/Home/CardEvents.vue';
-   
+ 
 </script>
-
-
-
-
-
-
-
 
 <template>
   <main>
-
-
-<CardEvents/>
+    
+    <Slider/>
   </main>
 
 </template>
