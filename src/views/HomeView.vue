@@ -1,8 +1,15 @@
 <script setup lang="ts">
 
-
-import CardEvents from "../components/Home/CardEvents.vue";
+import  CardEvents from '../components/Home/CardEvents.vue';
+   
 </script>
+
+
+
+
+
+
+
 
 <template>
   <main>
