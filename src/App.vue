@@ -13,10 +13,11 @@ import Footer from './components/Footer.vue';
     <Navbar/>
   </header>
    
+ 
+  <RouterView />
   <footer>
     <Footer/>
   </footer>
-  <RouterView />
 </template>
 
 <style scoped>
