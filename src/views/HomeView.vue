@@ -1,4 +1,10 @@
 <script setup lang="ts">
+
+   
+</script>
+
+<template>
+
 import CardEvents from "../components/Home/CardEvents.vue";
 </script>
 
@@ -8,6 +14,7 @@ import CardEvents from "../components/Home/CardEvents.vue";
 
 <CardEvents/>
   </main>
+
 </template>
 <style type="text/css">
 
