@@ -9,7 +9,11 @@ import  Slider from '../components/Slider.vue'
   <main>
     
     <Slider/>
+<<<<<<< HEAD
     <CardEvents/>
+=======
+    <CardEvents />
+>>>>>>> a5a72f2f2dfd9edd25ce56ffdf6b672e640a694c
   </main>
 
 </template>
