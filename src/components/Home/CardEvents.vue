@@ -57,8 +57,8 @@ const sendAddList = (id: any) => {};
           <h5>Hora: {{ event.time_event }}</h5>
           <h5>Aforo: {{ event.capacity }}</h5>
           <h5>Ubicación: {{ event.location }}</h5>
-
-          <button @click="sendAddList(event.id)">Añadir</button>
+     
+          <button type="button" class="btn btn-secondary" @click="sendAddList(event.id)">Añadir</button>
         </div>
       </div>
     </div>
@@ -96,8 +96,9 @@ const sendAddList = (id: any) => {};
 </template>
 
 <style lang="scss">
+
 .events {
-margin-top: 50rem;
+margin-top: 5rem;
   height: 60%;
   .events-cards {
     display: flex;
@@ -113,7 +114,7 @@ margin-top: 50rem;
       text-align: center;
       background-color: rgba(0, 0, 0, 0.8);
 
-      max-width: 18rem;
+      width: 24rem;
       font-size: 100%;
 
       img {
