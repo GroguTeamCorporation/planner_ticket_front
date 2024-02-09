@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CardEvents from '@/components/Home/CardEvents.vue';
 import  Slider from '../components/Slider.vue'
 
  
@@ -8,6 +9,7 @@ import  Slider from '../components/Slider.vue'
   <main>
     
     <Slider/>
+    <CardEvents />
   </main>
 
 </template>
