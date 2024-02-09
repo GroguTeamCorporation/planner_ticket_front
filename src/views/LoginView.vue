@@ -1,28 +1,31 @@
 <template>
-    <div id="main-container">
-        <div class="login-container">
-            <img class="logo" :src="'/src/assets/images/logo 1.png'">
+  <div id="main-container">
+    <div class="login-container">
+      <img class="logo" :src="'/src/assets/images/logo 1.png'">
+      
+      <form class="login-form" @submit.prevent="login">
+        <label class="label" for="username">User:</label>
+        <input class="input-field" type="text" v-model="username" required>
         
-            <form class="login-form" @submit.prevent= "login">
-                <label class="label" for="username">User:</label>
-                <input class="input-field" type="text" v-model="username" required>
-                
-                <label class="label" for="password">Password:</label>
-                <input class="input-field" type="password" v-model="password" required>
-                
-                <button  class="login-button" type="submit">Iniciar sesion</button>
-            </form>
-            <div class="additional">
-              <p>¿No eres usuario? <router-link to="/register">REGISTRATE</router-link></p>
-        <p>¿Olvidaste la contraseña? <a href="#">HAZ CLICK AQUI</a></p>
-            </div>
+        <label class="label" for="password">Password:</label>
+        <input class="input-field" type="password" v-model="password" required>
+        
+        <button class="login-button" type="submit">Iniciar sesión</button>
+      </form>
+      
+      <div class="additional">
+        <p>¿No eres usuario? <router-link to="/register">REGÍSTRATE</router-link></p>
+        <p>¿Olvidaste la contraseña? <a href="#">HAZ CLICK AQUÍ</a></p>
       </div>
     </div>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import axios from 'axios';
 
-export default {
+export default defineComponent({
   data() {
     return {
       username: "",
@@ -31,23 +34,27 @@ export default {
   },
   methods: {
     login() {
-      //  la solicitud de inicio de sesión al backend
-      this.$axios.post("http://localhost:8080/api/login", {
-        username: this.username,
-        password: this.password
+      axios.get("http://localhost:8080/api/v1/login", {
+        params: {
+          username: this.username,
+          password: this.password
+        }
       })
       .then(response => {
-        console.log(response.data);
-      
+        console.log("Inicio de sesión exitoso:", response.data);
+        // Redirigir directamente a la ruta especificada en redirectPath
+        this.$router.push(response.data.redirectPath);
       })
       .catch(error => {
-        console.error(error);
-        
+        console.error("Error al iniciar sesión:", error);
       });
     }
   }
-};
+});
 </script>
+
+
+
 <style scoped>
 
 @font-face{
