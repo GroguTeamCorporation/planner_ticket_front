@@ -11,7 +11,7 @@ import 'bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
->>>>>>>>> Temporary merge branch 2
+
 const app = createApp(App)
 
 app.use(createPinia())
