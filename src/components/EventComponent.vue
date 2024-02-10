@@ -60,7 +60,8 @@
   <script setup lang="ts">
   import axios from 'axios';
   import { ref, type Ref } from 'vue';
-  import type { Event} from '@/interfaces/EventInterface';
+import type { Event} from '@/interfaces/EventInterface';
+
 
   interface FormData {
 
@@ -98,8 +99,8 @@
           description: response.data.description,
           location: response.data.location,
           capacity: response.data.capacity,
-          date_event: response.data.date_event,
-          time_event: response.data.time_event,
+          date: response.data.date_event,
+          time: response.data.time_event,
           image: response.data.image,
         };
 
