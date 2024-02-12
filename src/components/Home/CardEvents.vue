@@ -1,25 +1,24 @@
+
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useEventsStore } from "../../stores/eventsStore";
 
-import axios from "axios";
+const eventsStore = useEventsStore();
+const router = useRouter();
 
-interface Event {
-  id: number;
-  title: string;
-  description: string;
-  location: string;
-  capacity: string;
-  date: string;
-  time: string;
-  image: string;
-}
-
-const allEvents = ref<Event[]>([]);
 const itemsPerPage = 3;
 const currentPage = ref(1);
+
+const allEvents = computed(() => eventsStore.allEvents);
+
+const paginatedEvents = computed(() => {
+  const startIndex = (currentPage.value - 1) * itemsPerPage;
+  const endIndex = currentPage.value * itemsPerPage;
+  return allEvents.value.slice(startIndex, endIndex);
+});
+
 const pages = computed(() => Math.ceil(allEvents.value.length / itemsPerPage));
-const router = useRouter();
 
 const changePage = (page: number) => {
   if (page >= 1 && page <= pages.value) {
@@ -28,24 +27,21 @@ const changePage = (page: number) => {
 };
 
 const fetchEvents = async () => {
-  const response = await axios.get("http://localhost:8080/api/v1/events");
-  allEvents.value = response.data;
-  console.log(response.data);
+  await eventsStore.fetchEvents();
 };
 
 fetchEvents();
 
-const sendAddList = (id: any) => {};
+const sendAddList = (id: any) => {
+  // Agrega la lógica para añadir a la lista
+};
 </script>
 
 <template>
   <div class="events">
     <div class="events-cards">
       <div
-        v-for="(event, index) in allEvents.slice(
-          (currentPage - 1) * itemsPerPage,
-          currentPage * itemsPerPage
-        )"
+        v-for="(event, index) in paginatedEvents"
         :key="event.id"
         class="event-card"
       >
