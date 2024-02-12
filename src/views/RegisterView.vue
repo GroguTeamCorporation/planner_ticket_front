@@ -1,42 +1,61 @@
 <template>
   <div id="main-container">
     <div class="login-container">
-      <img class="logo" :src="'/src/assets/images/logo 1.png'">
+      <img class="logo" :src="'/src/assets/images/logo 1.png'" />
 
-      <form class="login-form" @submit.prevent="registrarse">
-        <label class ="label" for="nombre">Nombre:</label>
-        <input class="input-field" type="text" v-model="nombre" required>
+      <form class="login-form" @submit.prevent="registerUser">
+        <label class="label" for="nombre">Nombre:</label>
+        <input class="input-field" type="text" v-model="nombre" required />
 
         <label class="label" for="email">Email:</label>
-        <input class="input-field" type="email" v-model="email" required>
+        <input class="input-field" type="email" v-model="email" required />
 
         <label class="label" for="password">Contraseña:</label>
-        <input class="input-field" type="password" v-model="password" required>
+        <input class="input-field" type="password" v-model="password" required />
 
         <button class="login-button" type="submit">Aceptar</button>
       </form>
-
-     
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      nombre: "",
-      email: "",
-      password: ""
-    };
-  },
-  methods: {
-    registrarse() {
-      // Lógica para enviar la solicitud de registro al backend
-      console.log("Solicitud de registro enviada");
-    }
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+interface User {
+  nombre: string;
+  email: string;
+  password: string;
+}
+
+const nombre = ref('');
+const email = ref('');
+const password = ref('');
+const isSubmitting = ref(false);
+
+const registerUser = async () => {
+  isSubmitting.value = true;
+
+  const data: User = {
+    nombre: nombre.value,
+    email: email.value,
+    password: password.value
+  };
+
+  try {
+    const response = await axios.post('http://localhost:8080/api/v1/users', data);
+    console.log('Usuario registrado exitosamente:', response.data);
+  } catch (error) {
+    console.error('Error al registrar usuario:', error);
+  } finally {
+    isSubmitting.value = false;
   }
 };
+
+onMounted(() => {
+  registerUser();
+});
 </script>
 
 <style scoped>
