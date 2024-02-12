@@ -3,7 +3,7 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useEventsStore } from "../../stores/eventsStore";
-import axios from 'axios';
+
 const eventsStore = useEventsStore();
 const router = useRouter();
 
@@ -25,44 +25,15 @@ const changePage = (page: number) => {
     currentPage.value = page;
   }
 };
-
+//que segun id usuaruio traiga sus eventos
 const fetchEvents = async () => {
   await eventsStore.fetchEvents();
 };
 
 fetchEvents();
 
-const userId = ref('123'); // ID del usuario actual, reemplaza con tu lógica para obtener el ID
-const isLoggedIn = ref(false); // Estado de autenticación del usuario, inicialmente falso
 
-
-async function sendAddList(userId: string) {
-  // Verifica si el usuario está autenticado
-  if (!isLoggedIn.value) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push({ name: 'Login' });
-  } else {
-    // Si el usuario está autenticado, realiza una solicitud HTTP para agregar el evento
-    try {
-      await axios.post('/api/add-event', { userId });
-      // Agrega el evento a la lista de usuarios en el backend
-      console.log('Evento agregado con éxito');
-    } catch (error) {
-      console.error('Error al agregar el evento', error);
-    }
-  }
-}
-
-function checkAuthentication() {
-  // Aquí debes verificar si el usuario está autenticado
-  // Por ejemplo, comprobando si hay un token JWT válido en el almacenamiento local
-  isLoggedIn.value = !!localStorage.getItem('jwtToken');
-}
-
-// Verifica la autenticación cuando el componente se monta
-checkAuthentication();
 </script>
-
 
 <template>
   <div class="events">
@@ -72,16 +43,14 @@ checkAuthentication();
         :key="event.id"
         class="event-card"
       >
-        <img :src="event.image" :alt="event.title" />
+      <div class="col-md-4"> <img :src="event.image" :alt="event.title" class="img-fluid rounded-start"/></div>
+      <div class="col-md-12">
         <div class="info-card">
           <h3>{{ event.title }}</h3>
-          <h5>Descripción: {{ event.description }}</h5>
-          <h5>Fecha: {{ event.date }}</h5>
-          <h5>Hora: {{ event.time }}</h5>
-          <h5>Aforo: {{ event.capacity }}</h5>
-          <h5>Ubicación: {{ event.location }}</h5>
+        
+          <h5>{{ event.date }}</h5>
      
-          <button type="button" class="btn btn-secondary" @click="sendAddList(userId)" >Asistir</button>
+        </div>
         </div>
       </div>
     </div>
@@ -122,7 +91,7 @@ checkAuthentication();
 
 .events {
 margin-top: 5rem;
-  height: 60%;
+  height: 40%;
   .events-cards {
     display: flex;
     flex-wrap: wrap;
@@ -137,7 +106,7 @@ margin-top: 5rem;
       text-align: center;
       background-color: rgba(0, 0, 0, 0.8);
 
-      width: 24rem;
+      width: 54rem;
       font-size: 100%;
 
       img {
