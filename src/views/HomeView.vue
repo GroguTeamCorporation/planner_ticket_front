@@ -20,7 +20,7 @@ import  Slider from '../components/Slider.vue'
 </template>
 <style type="text/css">
 
-main{
+body{
   background-image: url(/src/assets/img/concert6.jpg);
     background-size: cover;
     background-repeat: no-repeat;
