@@ -12,6 +12,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> header-Footer
 const app = createApp(App)
 
 app.use(createPinia())
