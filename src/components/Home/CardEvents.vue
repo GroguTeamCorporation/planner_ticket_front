@@ -11,8 +11,8 @@ interface Event {
     description: string;
     location: string;
     capacity: string;
-    date_event: string;
-    time_event: string;
+    date: string;
+    time: string;
     image: string;
    }
 
@@ -60,8 +60,8 @@ const sendAddList = (id: any) => {
         <div class="info-card">
           <h3>{{ event.title }}</h3>
           <h5>Descripción: {{ event.description }}</h5>
-          <h5>Fecha: {{ event.date_event }}</h5>
-          <h5>Hora: {{ event.time_event }}</h5>
+          <h5>Fecha: {{ event.date }}</h5>
+          <h5>Hora: {{ event.time }}</h5>
           <h5>Aforo: {{ event.capacity }}</h5>
           <h5>Ubicación: {{ event.location }}</h5>
         
