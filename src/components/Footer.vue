@@ -1,4 +1,7 @@
 <script setup lang="ts">
+
+  import 'bootstrap-icons/font/bootstrap-icons.css';
+
   import 'bootstrap-icons/font/bootstrap-icons.css';
 </script>
 <template>

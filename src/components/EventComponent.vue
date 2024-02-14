@@ -18,12 +18,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="date_event" class="form-label">Fecha</label>
+                    <label for="date" class="form-label">Fecha</label>
                     <input v-model="formData.date" type="date" class="form-control" id="date_event" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="time_event" class="form-label">Hora</label>
+                    <label for="time" class="form-label">Hora</label>
                     <input v-model="formData.time" type="time" class="form-control" id="time_event" required>
                 </div>
 
@@ -60,7 +60,8 @@
   <script setup lang="ts">
   import axios from 'axios';
   import { ref, type Ref } from 'vue';
-  import type { Event} from '@/interfaces/EventInterface';
+import type { Event} from '@/interfaces/EventInterface';
+
 
   interface FormData {
 
@@ -98,8 +99,8 @@
           description: response.data.description,
           location: response.data.location,
           capacity: response.data.capacity,
-          date_event: response.data.date_event,
-          time_event: response.data.time_event,
+          date: response.data.date,
+          time: response.data.time,
           image: response.data.image,
         };
 

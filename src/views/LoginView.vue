@@ -1,53 +1,63 @@
 <template>
-    <div id="main-container">
-        <div class="login-container">
-            <img class="logo" :src="'/src/assets/images/logo 1.png'">
+  <div id="main-container">
+    <div class="login-container">
+      <img class="logo" :src="'/src/assets/images/logo 1.png'">
+      
+      <form class="login-form" @submit.prevent="login">
+        <label class="label" for="username">Usuario:</label>
+        <input class="input-field" type="text" v-model="username" required>
         
-            <form class="login-form" @submit.prevent= "login">
-                <label class="label" for="username">User:</label>
-                <input class="input-field" type="text" v-model="username" required>
-                
-                <label class="label" for="password">Password:</label>
-                <input class="input-field" type="password" v-model="password" required>
-                
-                <button  class="login-button" type="submit">Iniciar sesion</button>
-            </form>
-            <div class="additional">
-              <p>¿No eres usuario? <router-link to="/register">REGISTRATE</router-link></p>
-        <p>¿Olvidaste la contraseña? <a href="#">HAZ CLICK AQUI</a></p>
-            </div>
+        <label class="label" for="password">Contraseña:</label>
+        <input class="input-field" type="password" v-model="password" required>
+        
+        <button class="login-button" type="submit">Iniciar sesión</button>
+      </form>
+      
+      <div class="additional">
+        <p>¿No tienes una cuenta? <router-link to="/register">Regístrate</router-link></p>
+        <p>¿Olvidaste tu contraseña? <a href="#">Haz clic aquí</a></p>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   data() {
     return {
-      username: "",
-      password: ""
+      username: '',
+      password: '',
     };
   },
   methods: {
-    login() {
-      //  la solicitud de inicio de sesión al backend
-      this.$axios.post("http://localhost:8080/api/login", {
-        username: this.username,
-        password: this.password
-      })
-      .then(response => {
+    async login() {
+      try {
+        const response = await axios.get('http://localhost:8080/api/v1/login', {
+          auth: {
+            username: this.username,
+            password: this.password,
+          }
+        });
         console.log(response.data);
-      
-      })
-      .catch(error => {
-        console.error(error);
-        
-      });
-    }
-  }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    },
+  },
 };
 </script>
+
+<style scoped>
+.error-message {
+  color: red;
+}
+</style>
+
+
+
+
 <style scoped>
 
 @font-face{
@@ -78,9 +88,8 @@ export default {
 
   width: 450px;
   height: 520px;
-  margin:25%;
+  margin:auto;
   margin-top: 12%;
-  margin-left: 38%;
   padding: 5px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(250, 247, 247, 0.1);
@@ -143,6 +152,27 @@ export default {
 }
 .label {
   color: whitesmoke;
+}
+@media screen and (max-width: 600px) {
+  .logo {
+    width: 40%;
+    margin-top: 10%;
+  }
+  .login-container{
+    width: 80%;
+    margin-top: 25%;
+  }
+  .login-form{
+    padding: 1px;
+  }
+  .input-field{
+    margin-bottom: 15px;
+  }
+  .login-button{
+    width: 70%;
+    margin-left: 10%;
+  }
+
 }
 
 </style>
