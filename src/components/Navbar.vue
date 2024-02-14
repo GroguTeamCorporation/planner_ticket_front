@@ -1,7 +1,3 @@
-<script setup lang="ts">
-  
-</script>
-
 <template>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
@@ -15,28 +11,42 @@
           <li class="nav-item">
             <RouterLink class="nav-link" to="/">Home</RouterLink>
           </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/login">Login</RouterLink>
-          </li>
           <li class="nav-item dropdown">
             <RouterLink class="nav-link" to="/register">Register</RouterLink>
-            
           </li>
           <li class="nav-item">
             <RouterLink class="nav-link" to="/list">List</RouterLink>
           </li>
-
           <li class="nav-item">
             <RouterLink class="nav-link" to="/admin">Admin</RouterLink>
           </li>
+          <li class="nav-item">
+            <button class="btn btn-link nav-link" @click="logout">Logout</button>
+          </li>
         </ul>
       </div>
-   </div>
+    </div>
   </nav>
 </template>
 
+<script>
+import axios from 'axios';
+
+export default {
+  methods: {
+    async logout() {
+      try {
+        await axios.get('http://localhost:8080/api/v1/logout');
+        // Lógica adicional después de cerrar sesión, como redireccionar al inicio
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+      }
+    }
+  }
+}
+</script>
 
 <style scoped lang="scss">
-    @import '../assets/Navbar.scss';
-    @import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
+@import '../assets/Navbar.scss';
+@import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
 </style>
