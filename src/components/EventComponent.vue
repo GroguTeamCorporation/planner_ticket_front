@@ -7,7 +7,6 @@
       <div class="modal-content"  style="background-color: #5E6572; color: #000000;">
         <div class="modal-header d-flex justify-content-center align-items-center">
           <h5 class="modal-title" id="exampleModalLabel" style="color: #EEF1EF;">Nuevo Evento</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form @submit.prevent="addEvent" class="row g-3 justify-content-center align-items-center">
@@ -61,7 +60,7 @@
               <p class="card-text">Entradas disponibles: {{ event.capacity }}</p>
               <p class="card-text">Fecha: {{ event.date }}</p>
               <p class="card-text">Hora: {{ event.time }}</p>
-              <img :src="event.image" alt="Imagen del evento" class="img-fluid" />
+              <img :src="event.image || ''" alt="Imagen del evento" class="img-fluid"  />
             </div>
           </div>
 
@@ -99,7 +98,7 @@
   
   const timeErrorMessage = ref('');
 
-  const addEvent = async () => {
+/*   const addEvent = async () => {
     try {
       const response = await axios.post('http://localhost:8080/api/v1/events', formData.value, {
     });
@@ -124,7 +123,55 @@
   } catch (error: any) {
     console.error('Error al enviar los datos al servidor:', error.message);
   }
+}; */
+
+
+const addEvent = async () => {
+  try {
+    // Primero, sube la imagen
+    if (formData.value.image && ((formData.value.image as any) instanceof File || (formData.value.image as any) instanceof Blob)) {
+      const imageFormData = new FormData();
+      imageFormData.append('file', formData.value.image);
+      const imageResponse = await axios.post('http://localhost:8080/api/v1/images', imageFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      // Extrae el nombre de la imagen de la respuesta
+      const imageName = imageResponse.data; // Asume que la respuesta contiene el nombre de la imagen
+
+      // Luego, crea el evento con la referencia a la imagen
+      const eventData = {
+        ...formData.value,
+        image: '/images/' + imageName // Asegúrate de que la ruta de la imagen coincida con la ruta configurada en tu backend
+      };
+      const eventResponse = await axios.post('http://localhost:8080/api/v1/events', eventData);
+
+      // Procesa la respuesta del evento como desees
+      // Por ejemplo, puedes agregar el nuevo evento a la lista de eventos
+      const newEvent: Event = {
+        id: eventResponse.data.id,
+        title: eventResponse.data.title,
+        description: eventResponse.data.description,
+        location: eventResponse.data.location,
+        capacity: eventResponse.data.capacity,
+        date: eventResponse.data.date,
+        time: eventResponse.data.time,
+        image: eventResponse.data.image,
+      };
+      allEvents.value.push(newEvent);
+      closeModal();
+      clearForm();
+    } else {
+      console.error('No se seleccionó ninguna imagen para subir.');
+    }
+  } catch (error: any) {
+    console.error('Error al enviar los datos al servidor:', error.message);
+  }
 };
+
+
 
 const closeModal = () => {
   const modal = document.getElementById('close');
