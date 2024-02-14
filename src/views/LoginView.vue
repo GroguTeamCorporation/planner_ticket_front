@@ -31,6 +31,9 @@ export default {
       password: '',
     };
   },
+  created(){
+    axios.defaults.withCredentials = true;
+  },
   methods: {
     async login() {
       try {
