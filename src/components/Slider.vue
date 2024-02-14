@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div id="carouselExampleDark" class="carousel carousel-dark slide w-75 center ">
+    <div id="carouselExampleDark" class="carousel carousel-dark mt-4 slide w-97  center ">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -61,4 +61,8 @@
 
 <style scoped lang="scss">
     @import '../assets/Slider.scss';
+    img{
+        height: 35rem;
+        margin-left: 0.5rem;
+    }
 </style>
