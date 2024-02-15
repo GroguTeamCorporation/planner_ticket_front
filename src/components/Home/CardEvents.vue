@@ -137,7 +137,7 @@ margin-top: 5rem;
       text-align: center;
       background-color: rgba(0, 0, 0, 0.8);
 
-      width: 24rem;
+      width: 24rem !important;
       font-size: 100%;
 
       img {
