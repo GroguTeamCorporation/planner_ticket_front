@@ -1,10 +1,14 @@
 <script setup lang="ts">
+<<<<<<< HEAD
    
 
+=======
+
+import CardEvents from '../components/Home/CardEvents.vue';
+>>>>>>> ec7785f1620fc2cdc6b2439ddba9256fa6522563
     
 import CardEvents from '@/components/Home/CardEvents.vue';
 import  Slider from '../components/Slider.vue'
-
  
 </script>
 
@@ -16,6 +20,7 @@ import  Slider from '../components/Slider.vue'
   </main>
 
 </template>
+
 <style type="text/css">
 
 body{
