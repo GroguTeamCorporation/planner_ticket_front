@@ -4,8 +4,10 @@ export interface Event {
     title: string;
     description: string;
     location: string;
-    capacity: string;
+    capacity: number;
     date: string;
     time: string;
-    image: string;
-  }
+    image: string | null;
+   }
+
+   
