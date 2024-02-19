@@ -4,6 +4,7 @@ import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useEventsStore } from "../../stores/eventsStore";
 import axios from 'axios';
+
 const eventsStore = useEventsStore();
 const router = useRouter();
 
@@ -32,35 +33,21 @@ const fetchEvents = async () => {
 
 fetchEvents();
 
-const userId = ref('123'); // ID del usuario actual, reemplaza con tu lógica para obtener el ID
-const isLoggedIn = ref(false); // Estado de autenticación del usuario, inicialmente falso
 
 
-async function sendAddList(userId: string) {
-  // Verifica si el usuario está autenticado
-  if (!isLoggedIn.value) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push({ name: 'Login' });
-  } else {
-    // Si el usuario está autenticado, realiza una solicitud HTTP para agregar el evento
-    try {
-      await axios.post('/api/add-event', { userId });
-      // Agrega el evento a la lista de usuarios en el backend
+
+async function sendAddList(path="/list") {
+
+      await axios.post('/api/list_us');
+    
       console.log('Evento agregado con éxito');
-    } catch (error) {
-      console.error('Error al agregar el evento', error);
-    }
-  }
+   
+      
 }
 
-function checkAuthentication() {
-  // Aquí debes verificar si el usuario está autenticado
-  // Por ejemplo, comprobando si hay un token JWT válido en el almacenamiento local
-  isLoggedIn.value = !!localStorage.getItem('jwtToken');
-}
 
-// Verifica la autenticación cuando el componente se monta
-checkAuthentication();
+
+
 </script>
 
 
@@ -81,7 +68,7 @@ checkAuthentication();
           <h5>Aforo: {{ event.capacity }}</h5>
           <h5>Ubicación: {{ event.location }}</h5>
      
-          <button type="button" class="btn btn-secondary" @click="sendAddList(userId)" >Asistir</button>
+          <button type="submit" class="btn btn-secondary" @click="sendAddList()" >Asistir</button>
         </div>
       </div>
     </div>

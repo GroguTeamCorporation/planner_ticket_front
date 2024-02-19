@@ -1,9 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
-import RegisterView from '../views/RegisterView.vue'
-import ListView from '../views/ListView.vue'
-import AdminView from '../views/AdminView.vue'
 import { useAuthStore } from '@/stores/authStore'
 
 const routes = [
@@ -23,11 +19,11 @@ const routes = [
     component: () => import('../views/RegisterView.vue'),
   },
   {
-    path: '/user/:userId/events',
+    path: '/list',
     name: 'list',
     component: () => import('../views/ListView.vue'),
     meta: { requiresAuth: true },
-    props: true // Habilita pasar props a través de la ruta
+   
   },
   
   {

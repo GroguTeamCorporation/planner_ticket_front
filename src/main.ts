@@ -15,11 +15,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-<<<<<<< HEAD
 import 'mdb-vue-ui-kit/css/mdb.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
-=======
->>>>>>> ec7785f1620fc2cdc6b2439ddba9256fa6522563
 
 const app = createApp(App)
 

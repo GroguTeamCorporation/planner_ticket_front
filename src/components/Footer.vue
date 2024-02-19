@@ -35,10 +35,6 @@
 
   <style scoped  lang="scss">
     @import '../assets/footer.scss';
-<<<<<<< HEAD
   </style>
 
 
-=======
-  </style>
->>>>>>> ec7785f1620fc2cdc6b2439ddba9256fa6522563

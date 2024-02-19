@@ -2,15 +2,16 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
-import { useEventsStore } from "../../stores/eventsStore";
+import { useListUsStore } from '../../stores/listUsStore';
 
-const eventsStore = useEventsStore();
+
+const listUsStore = useListUsStore();
 const router = useRouter();
 
 const itemsPerPage = 3;
 const currentPage = ref(1);
 
-const allEvents = computed(() => eventsStore.allEvents);
+const allEvents = computed(() => listUsStore.allEvents);
 
 const paginatedEvents = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage;
@@ -25,12 +26,13 @@ const changePage = (page: number) => {
     currentPage.value = page;
   }
 };
-//que segun id usuaruio traiga sus eventos
+
 const fetchEvents = async () => {
-  await eventsStore.fetchEvents();
+  await listUsStore.fetchEvents();
 };
 
 fetchEvents();
+
 
 
 </script>
