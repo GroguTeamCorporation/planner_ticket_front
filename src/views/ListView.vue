@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CardList from "../components/List/CardList.vue"
-import CardEvents from '../components/Home/CardEvents.vue';
 
 
 </script>
@@ -13,3 +12,6 @@ import CardEvents from '../components/Home/CardEvents.vue';
 
   </main>
 </template>
+
+
+
