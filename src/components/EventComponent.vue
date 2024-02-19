@@ -145,7 +145,6 @@ const addEvent = async () => {
         image: '/images/' + imageName
       };
 
-
       const eventResponse = await axios.post('http://localhost:8080/api/v1/events', eventData);
 
       const newEvent: Event = {
@@ -162,7 +161,7 @@ const addEvent = async () => {
       closeModal();
       clearForm();
     } else {
-      console.error('No se seleccionó ninguna imagen para subir.');
+      console.error('No se ha seleccionado ninguna imagen para subir.');
     }
   } catch (error: any) {
     console.error('Error al enviar los datos al servidor:', error.message);
