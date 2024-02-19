@@ -53,12 +53,6 @@ export default {
 .error-message {
   color: red;
 }
-</style>
-
-
-
-
-<style scoped>
 
 @font-face{
   font-family: 'fuente';

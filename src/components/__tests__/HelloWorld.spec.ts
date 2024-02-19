@@ -1,9 +1,11 @@
 import { mount } from '@vue/test-utils';
 import LoginComponent from '@/views/LoginView.vue';
 import axios from 'axios';
+import { describe, it } from 'node:test';
+import { expect } from '@jest/globals';
 
 jest.mock('axios', () => ({
-  post: jest.fn(() => Promise.resolve({ data: {} })),
+  post: jest.fn().mockImplementation(() => Promise.resolve({ data:{} })),
 }));
 
 describe('LoginComponent', () => {
@@ -13,49 +15,46 @@ describe('LoginComponent', () => {
     expect(wrapper.find('.logo').exists()).toBe(true);
   });
 
-  it('calls registerUser method on form submission and handles successful registration', async () => {
+  it('calls login method on form submission and handles successful login', async () => {
     const wrapper = mount(LoginComponent);
 
     // Mock user input
-    await wrapper.setData({ nombre: 'pepe', email: 'pepe@ejemplo.com', password: 'pepe' });
+    await wrapper.setData({ email: 'pepe@ejemplo.com', password: 'pepe' });
 
     // Simulate form submission
     await wrapper.find('.login-form').trigger('submit.prevent');
 
     // Verify that axios.post is called with the correct data
-    expect(axios.post).toHaveBeenCalledWith('http://localhost:8080/api/v1/users', {
-      nombre: 'pepe',
+    expect(axios.post).toHaveBeenCalledWith('http://localhost:8080/api/v1/login', {
       email: 'pepe@ejemplo.com',
       password: 'pepe',
     });
 
-    // Wait for the next tick to allow the asynchronous registerUser method to complete
+    // Wait for the next tick to allow the asynchronous login method to complete
     await wrapper.vm.$nextTick();
 
-    // Ensure that isSubmitting is set to false after the registration
+    // Ensure that isSubmitting is set to false after successful login
     expect(wrapper.vm.isSubmitting).toBe(false);
-
-   
   });
 
-  it('handles error during registration', async () => {
-    // Set up the mock to simulate an error during registration
-    axios.post.mockRejectedValueOnce(new Error('Registration failed'));
+  it('handles error during login', async () => {
+    // Set up the mock to simulate an error during login
+    axios.post.mockRejectedValueOnce(new Error('Login failed'));
 
     const wrapper = mount(LoginComponent);
 
     // Mock user input
-    await wrapper.setData({ nombre: 'pepe', email: 'pepe@example.com', password: 'p' });
+    await wrapper.setData({ email: 'pepe@example.com', password: 'pepe' });
 
     // Simulate form submission
     await wrapper.find('.login-form').trigger('submit.prevent');
 
-    // Wait for the next tick to allow the asynchronous registerUser method to complete
+    // Wait for the next tick to allow the asynchronous login method to complete
     await wrapper.vm.$nextTick();
 
-    // Ensure that isSubmitting is set to false after the failed registration
+    // Ensure that isSubmitting is set to false after the failed login
     expect(wrapper.vm.isSubmitting).toBe(false);
-
-   
   });
 });
+
+
