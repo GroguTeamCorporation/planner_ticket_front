@@ -31,13 +31,19 @@
 
 <script>
 import axios from 'axios';
+import { useAuthStore } from '@/stores/authStore'; 
+import router from '@/router/index' 
 
 export default {
   methods: {
     async logout() {
+      const authStore = useAuthStore(); 
       try {
         await axios.get('http://localhost:8080/api/v1/logout');
-        // Lógica adicional después de cerrar sesión, como redireccionar al inicio
+        authStore.username.isAuthenticated = false;
+        authStore.username.role = '';
+        const redirectPath = '/';
+        router.push(redirectPath);
       } catch (error) {
         console.error('Error al cerrar sesión:', error);
       }

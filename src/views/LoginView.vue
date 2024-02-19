@@ -2,17 +2,17 @@
   <div id="main-container">
     <div class="login-container">
       <img class="logo" :src="'/src/assets/images/logo 1.png'">
-      
+
       <form class="login-form" @submit.prevent="login">
         <label class="label" for="username">Usuario:</label>
         <input class="input-field" type="text" v-model="username" required>
-        
+
         <label class="label" for="password">Contraseña:</label>
         <input class="input-field" type="password" v-model="password" required>
-        
+
         <button class="login-button" type="submit">Iniciar sesión</button>
       </form>
-      
+
       <div class="additional">
         <p>¿No tienes una cuenta? <router-link to="/register">Regístrate</router-link></p>
         <p>¿Olvidaste tu contraseña? <a href="#">Haz clic aquí</a></p>
@@ -22,8 +22,10 @@
 </template>
 
 <script lang="ts">
+// TuComponente.vue
 import axios from 'axios';
-
+import { useAuthStore } from '@/stores/authStore'; 
+import router from '@/router/index'
 export default {
   data() {
     return {
@@ -31,11 +33,12 @@ export default {
       password: '',
     };
   },
-  created(){
+  created() {
     axios.defaults.withCredentials = true;
   },
   methods: {
     async login() {
+      const authStore = useAuthStore(); 
       try {
         const response = await axios.get('http://localhost:8080/api/v1/login', {
           auth: {
@@ -44,6 +47,16 @@ export default {
           }
         });
         console.log(response.data);
+        authStore.username.isAuthenticated = response.data.isAuthenticated;
+        authStore.username.role = response.data.role;
+
+        let redirectPath = '/';
+        if (authStore.username.role === 'ROLE_ADMIN') {
+          redirectPath = '/admin';
+        } else if (authStore.username.role === 'ROLE_USER') {
+          redirectPath = '/list';
+        }
+        router.push(redirectPath);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -51,6 +64,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .error-message {
@@ -62,10 +76,9 @@ export default {
 
 
 <style scoped>
-
-@font-face{
+@font-face {
   font-family: 'fuente';
-  src:url('../assets/fonts/Peralta-Regular.ttf');
+  src: url('../assets/fonts/Peralta-Regular.ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -81,31 +94,31 @@ export default {
 }
 
 
-.logo{
-    width:25%;
-    margin-left:35%;
-    margin-top: 5%;
+.logo {
+  width: 25%;
+  margin-left: 35%;
+  margin-top: 5%;
 }
 
 .login-container {
 
   width: 450px;
   height: 520px;
-  margin:auto;
+  margin: auto;
   margin-top: 12%;
   padding: 5px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(250, 247, 247, 0.1);
-  background:rgb(58, 58, 57);
+  background: rgb(58, 58, 57);
   opacity: 0.9;
-  
+
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  padding:20px ;
-  
+  padding: 20px;
+
 }
 
 .input-field {
@@ -113,38 +126,39 @@ export default {
   padding: 8px;
   border: 2px solid #2a5381;
   border-radius: 6px;
-  
+
 }
 
 .login-button {
-  background-color:white;
-  color:black;
+  background-color: white;
+  color: black;
   padding: 10px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  width:30%;
+  width: 30%;
   margin-left: 35%;
   margin-top: 5%;
   transition: 0.3s;
-  font-family: 'fuente' ;
+  font-family: 'fuente';
 }
 
 .login-button:hover {
   background-color: #2a5381;
-  color : white;
+  color: white;
 }
+
 .additional {
   margin-top: 20px;
   text-align: center;
-  
+
 }
 
 .additional p {
   margin: 5px 0;
   color: whitesmoke;
-  
-  
+
+
 }
 
 .additional a {
@@ -153,31 +167,36 @@ export default {
   cursor: pointer;
   font-family: 'fuente';
 }
+
 .label {
   color: whitesmoke;
 }
+
 @media screen and (max-width: 600px) {
   .logo {
     width: 40%;
     margin-top: 10%;
   }
-  .login-container{
+
+  .login-container {
     width: 80%;
     margin-top: 25%;
   }
-  .login-form{
+
+  .login-form {
     padding: 1px;
   }
-  .input-field{
+
+  .input-field {
     margin-bottom: 15px;
   }
-  .login-button{
+
+  .login-button {
     width: 70%;
     margin-left: 10%;
   }
 
 }
-
 </style>
 
 
