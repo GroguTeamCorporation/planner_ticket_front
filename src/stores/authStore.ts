@@ -1,17 +1,16 @@
-import { ref, reactive } from "vue";
-import { defineStore } from "pinia";
+import type { ILoggedInUser } from "@/models/ILoggedInUser"
+import { defineStore } from "pinia"
+import { reactive } from "vue"
+
 
 
 export const useAuthStore = defineStore('auth', () => {
 
-    const user = reactive(
-        {
-            username: 'admin',
-            password: 'my-password',
-            isAuthenticated: false,
-            isAdmin: false
-        }
-    )
-
-    return { user }
+    const username: ILoggedInUser= reactive({
+        username: '',
+        role: '',
+        isAuthenticated: false
+    })
+    
+    return { username }
 })

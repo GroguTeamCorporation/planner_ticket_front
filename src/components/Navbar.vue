@@ -1,3 +1,5 @@
+
+
 <script setup lang="ts">
     import {
       MDBNavbar,
@@ -40,10 +42,33 @@
       </MDBNavbarNav>
     </MDBCollapse>
   </MDBNavbar>
+
 </template>
 
+<script>
+import axios from 'axios';
+import { useAuthStore } from '@/stores/authStore'; 
+import router from '@/router/index' 
+
+export default {
+  methods: {
+    async logout() {
+      const authStore = useAuthStore(); 
+      try {
+        await axios.get('http://localhost:8080/api/v1/logout');
+        authStore.username.isAuthenticated = false;
+        authStore.username.role = '';
+        const redirectPath = '/';
+        router.push(redirectPath);
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+      }
+    }
+  }
+}
+</script>
 
 <style scoped lang="scss">
-    @import '../assets/Navbar.scss';
-    @import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
+@import '../assets/Navbar.scss';
+@import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
 </style>

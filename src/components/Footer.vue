@@ -35,6 +35,9 @@
 
   <style scoped  lang="scss">
     @import '../assets/footer.scss';
+
   </style>
+
+
 
 
