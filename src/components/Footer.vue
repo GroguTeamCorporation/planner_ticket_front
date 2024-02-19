@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
   import 'bootstrap-icons/font/bootstrap-icons.css';
+
+  import 'bootstrap-icons/font/bootstrap-icons.css';
 </script>
 <template>
     <footer class="text-white-50 text-center text-lg-start position-fixed bottom-0 w-100">
@@ -33,4 +35,6 @@
 
   <style scoped  lang="scss">
     @import '../assets/footer.scss';
+
   </style>
+
