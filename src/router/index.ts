@@ -22,7 +22,7 @@ const routes = [
     path: '/list',
     name: 'list',
     component: () => import('../views/ListView.vue'),
-    meta: { requiresAuth: true },
+    //meta: { requiresAuth: true },
    
   },
   

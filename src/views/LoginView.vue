@@ -41,12 +41,18 @@ export default {
           }
         });
         console.log(response.data);
+        
+        localStorage.setItem('access_token', response.data.access_token);
       } catch (error) {
         console.error('Error:', error);
+        alert('Error al iniciar sesión. Por favor, verifica tus credenciales.');
       }
     },
   },
 };
+
+
+
 </script>
 
 <style scoped>
