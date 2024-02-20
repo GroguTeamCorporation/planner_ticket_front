@@ -1,5 +1,3 @@
-
-
 <script setup lang="ts">
     import {
       MDBNavbar,
@@ -36,6 +34,9 @@
         </MDBNavbarItem>
         <MDBNavbarItem to="#">
           <RouterLink class="nav-link" to="/admin">Admin</RouterLink>
+        </MDBNavbarItem>
+        <MDBNavbarItem to="#">
+          <RouterLink class="nav-link" to="/logout">Logout</RouterLink>
         </MDBNavbarItem>
       </MDBNavbarNav>
     </MDBCollapse>

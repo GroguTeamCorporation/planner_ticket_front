@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-// TuComponente.vue
+
 import axios from 'axios';
 import { useAuthStore } from '@/stores/authStore'; 
 import router from '@/router/index'
@@ -59,10 +59,14 @@ export default {
         router.push(redirectPath);
       } catch (error) {
         console.error('Error:', error);
+        alert('Error al iniciar sesión. Por favor, verifica tus credenciales.');
       }
     },
   },
 };
+
+
+
 </script>
 
 
