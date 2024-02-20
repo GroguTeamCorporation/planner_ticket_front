@@ -2,14 +2,13 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useEventsStore } from "../../stores/eventsStore";
-import axios from 'axios';
+import { useListUsStore } from '../../stores/listUsStore';
+
 
 const eventsStore = useEventsStore();
 const router = useRouter();
-
 const itemsPerPage = 3;
 const currentPage = ref(1);
-
 const allEvents = computed(() => eventsStore.allEvents);
 
 const paginatedEvents = computed(() => {
@@ -32,14 +31,18 @@ const fetchEvents = async () => {
 
 fetchEvents();
 
-async function sendAddList(path = "/list") {
 
-  await axios.post('http://localhost:8080/api/v1/list_us');
-
-  console.log('Evento agregado con éxito');
+const listUsStore = useListUsStore();
 
 
-}
+const sendAddList = (event: Event) => {
+  if (event) {
+    listUsStore.sendAddList(event);
+  } else {
+    console.error('El evento es undefined');
+  }
+};
+
 </script>
 <template>
     <div class="events">
@@ -57,8 +60,7 @@ async function sendAddList(path = "/list") {
             <h5>Hora: {{ event.time }}</h5>
             <h5>Aforo: {{ event.capacity }}</h5>
             <h5>Ubicación: {{ event.location }}</h5>
-     
-            <button type="submit" class="btn btn-secondary" @click="sendAddList()" >Asistir</button>
+            <button type="submit" class="btn btn-secondary" @click="sendAddList(event)">Asistir</button>
           </div>
         </div>
       </div>

@@ -6,10 +6,8 @@ import { useListUsStore } from '../../stores/listUsStore';
 
 const listUsStore = useListUsStore();
 const router = useRouter();
-
 const itemsPerPage = 3;
 const currentPage = ref(1);
-
 const allEvents = computed(() => listUsStore.allEvents);
 
 const paginatedEvents = computed(() => {
@@ -31,9 +29,6 @@ const fetchEvents = async () => {
 };
 
 fetchEvents();
-
-
-
 </script>
 
 <template>
@@ -48,10 +43,8 @@ fetchEvents();
       <div class="col-md-12">
         <div class="info-card">
           <h3>{{ event.title }}</h3>
-        
           <h5>{{ event.date }}</h5>
-     
-        </div>
+          </div>
         </div>
       </div>
     </div>
