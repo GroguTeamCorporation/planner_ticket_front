@@ -98,7 +98,6 @@ const sendAddList = (event: Event) => {
 </template>
 
 <style lang="scss">
-
 .events {
 margin-top: 5rem;
   height: 60%;
