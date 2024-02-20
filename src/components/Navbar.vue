@@ -9,9 +9,7 @@
     } from 'mdb-vue-ui-kit';
   import { ref } from 'vue';
   const collapse1 = ref(false);
-  
 </script>
-
 <template>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
   <MDBNavbar expand="lg" container class="navbar">
@@ -44,8 +42,6 @@
     </MDBCollapse>
   </MDBNavbar>
 </template>
-
-
 <style scoped lang="scss">
     @import '../assets/Navbar.scss';
     @import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
