@@ -22,7 +22,6 @@
 </template>
 
 <script lang="ts">
-// TuComponente.vue
 import axios from 'axios';
 import { useAuthStore } from '@/stores/authStore'; 
 import router from '@/router/index'
@@ -64,8 +63,6 @@ export default {
   },
 };
 </script>
-
-
 <style scoped>
 .error-message {
   color: red;
