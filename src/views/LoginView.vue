@@ -2,14 +2,11 @@
   <div id="main-container">
     <div class="login-container">
       <img class="logo" :src="'/src/assets/images/logo 1.png'">
-
       <form class="login-form" @submit.prevent="login">
         <label class="label" for="username">Usuario:</label>
         <input class="input-field" type="text" v-model="username" required>
-
         <label class="label" for="password">Contraseña:</label>
         <input class="input-field" type="password" v-model="password" required>
-
         <button class="login-button" type="submit">Iniciar sesión</button>
       </form>
 
@@ -20,7 +17,6 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import axios from 'axios';
 import { useAuthStore } from '@/stores/authStore'; 
@@ -58,10 +54,14 @@ export default {
         router.push(redirectPath);
       } catch (error) {
         console.error('Error:', error);
+        alert('Error al iniciar sesión. Por favor, verifica tus credenciales.');
       }
     },
   },
 };
+
+
+
 </script>
 <style scoped>
 .error-message {
