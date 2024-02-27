@@ -45,23 +45,25 @@ const sendAddList = (event: Event) => {
 
 </script>
 <template>
-    <div class="events">
-      <div class="events-cards">
-        <div
-          v-for="(event, index) in paginatedEvents"
-          :key="event.id"
-          class="event-card"
-        >
-          <img :src="event.image" :alt="event.title" />
-          <div class="info-card">
-            <h3>{{ event.title }}</h3>
-            <h5>Descripción: {{ event.description }}</h5>
-            <h5>Fecha: {{ event.date }}</h5>
-            <h5>Hora: {{ event.time }}</h5>
-            <h5>Aforo: {{ event.capacity }}</h5>
-            <h5>Ubicación: {{ event.location }}</h5>
-            <button type="submit" class="btn btn-secondary" @click="sendAddList(event)">Asistir</button>
-          </div>
+  <div class="events">
+    <div class="events-cards">
+      <div
+        v-for="(event, index) in paginatedEvents"
+        :key="event.id"
+        class="event-card"
+      >
+        <!-- <img :src="event.image" :alt="event.title" /> -->
+        <img :src="`/api/v1/images/${event.image}`" :alt="event.title">
+        
+        <div class="info-card">
+          <h3>{{ event.title }}</h3>
+          <h5>Descripción: {{ event.description }}</h5>
+          <h5>Fecha: {{ event.date }}</h5>
+          <h5>Hora: {{ event.time }}</h5>
+          <h5>Aforo: {{ event.capacity }}</h5>
+          <h5>Ubicación: {{ event.location }}</h5>
+     
+          <button type="button" class="btn btn-secondary" @click="sendAddList(event.id)">Añadir</button>
         </div>
       </div>
       <nav aria-label="page" class="page">
@@ -95,6 +97,7 @@ const sendAddList = (event: Event) => {
         </ul>
       </nav>
     </div>
+  </div>
 </template>
 
 <style lang="scss">
