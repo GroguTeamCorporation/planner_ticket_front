@@ -35,14 +35,14 @@ fetchEvents();
 const listUsStore = useListUsStore();
 
 
-const sendAddList = (event: Event) => {
-  if (event) {
-    listUsStore.sendAddList(event);
+const sendAddList = (eventData: any) => { // Cambiado para aceptar el objeto eventData directamente
+  if (eventData) {
+    console.log('Event data:', eventData); // Log the event object
+    listUsStore.sendAddList(eventData);
   } else {
     console.error('El evento es undefined');
   }
-};
-
+}
 </script>
 <template>
   <div class="events">
@@ -63,7 +63,7 @@ const sendAddList = (event: Event) => {
           <h5>Aforo: {{ event.capacity }}</h5>
           <h5>Ubicación: {{ event.location }}</h5>
      
-          <button type="button" class="btn btn-secondary" @click="sendAddList(event.id)">Añadir</button>
+          <button type="button" class="btn btn-secondary" @click="() => { console.log(event); sendAddList(event); }">Añadir</button>
         </div>
       </div>
       <nav aria-label="page" class="page">
