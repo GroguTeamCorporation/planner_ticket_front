@@ -97,6 +97,7 @@ const sendAddList = (event: Event) => {
         </ul>
       </nav>
     </div>
+  </div>
 </template>
 
 <style lang="scss">
