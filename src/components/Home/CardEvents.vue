@@ -34,15 +34,20 @@ fetchEvents();
 
 const listUsStore = useListUsStore();
 
-
-const sendAddList = (eventData: any) => { // Cambiado para aceptar el objeto eventData directamente
+const sendAddList = async (eventData: any) => {
   if (eventData) {
-    console.log('Event data:', eventData); // Log the event object
-    listUsStore.sendAddList(eventData);
+    console.log('Event data:', eventData);
+    try {
+      await listUsStore.sendAddList(eventData);
+      // Redirigir al usuario a la lista de eventos después de añadir el evento
+      router.push('/list');
+    } catch (error) {
+      console.error('Error al añadir el evento:', error);
+    }
   } else {
     console.error('El evento es undefined');
   }
-}
+};
 </script>
 <template>
   <div class="events">
