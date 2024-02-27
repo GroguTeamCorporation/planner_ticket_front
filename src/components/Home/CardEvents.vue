@@ -45,7 +45,9 @@ const sendAddList = (id: any) => {
         :key="event.id"
         class="event-card"
       >
-        <img :src="event.image" :alt="event.title" />
+        <!-- <img :src="event.image" :alt="event.title" /> -->
+        <img :src="`/api/v1/images/${event.image}`" :alt="event.title">
+        
         <div class="info-card">
           <h3>{{ event.title }}</h3>
           <h5>Descripción: {{ event.description }}</h5>

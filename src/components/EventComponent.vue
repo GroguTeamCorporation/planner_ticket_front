@@ -38,7 +38,7 @@
             <div class="col-md-4">
               <div class="m-3">
                 <label for="image" class="form-label">Añadir imagen</label>
-                <input type="file" class="form-control" id="image" @change="handleImageChange"/>
+                <input type="file" class="form-control" id="image" @change="handleImageChange" required/>
               </div>
             </div>
 
@@ -74,6 +74,7 @@
   import axios from 'axios';
   import { ref, type Ref } from 'vue';
   import type { Event} from '@/interfaces/EventInterface';
+  import { useEventsStore } from "@/stores/eventsStore";
 
 
   interface FormData {
@@ -126,8 +127,8 @@
   }
 }; */
 
-
-const addEvent = async () => {
+// PRUEBA 1.1
+/* const addEvent = async () => {
   try {
     if (formData.value.image && ((formData.value.image as any) instanceof File || (formData.value.image as any) instanceof Blob)) {
       const imageFormData = new FormData();
@@ -174,7 +175,47 @@ const closeModal = () => {
     modal.classList.remove('show'); 
     modal.style.display = 'none'; 
   }
-}; 
+};  */
+
+
+//PRUEBA 1.1
+const eventsStore = useEventsStore();
+
+const addEvent = async () => {
+  try {
+    if (formData.value.image && ((formData.value.image as any) instanceof File || (formData.value.image as any) instanceof Blob)) {
+      const imageFormData = new FormData();
+      imageFormData.append('file', formData.value.image);
+      const imageResponse = await axios.post('http://localhost:8080/api/v1/images', imageFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      const imageName = imageResponse.data;  
+
+      const eventData = {
+        ...formData.value,
+        image: '/images/' + imageName
+      };
+
+      const eventResponse = await axios.post('http://localhost:8080/api/v1/events', eventData);
+
+      // Llama a fetchEvents para actualizar la lista de eventos
+      await eventsStore.fetchEvents();
+
+      // Cierra el modal y limpia el formulario
+      clearForm();
+      $('#exampleModal').modal('hide');
+
+    } else {
+      console.error('No se ha seleccionado ninguna imagen para subir.');
+    }
+  } catch (error: any) {
+    console.error('Error al enviar los datos al servidor:', error.message);
+  }
+};
+
 
 const handleImageChange = (event: any) => {
   console.log('Imagen seleccionada:', event.target.files[0]);
