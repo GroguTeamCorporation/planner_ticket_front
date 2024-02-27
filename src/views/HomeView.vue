@@ -18,6 +18,8 @@ body{
   background-image: url(/src/assets/img/concert6.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
+    
 
 }
 </style>

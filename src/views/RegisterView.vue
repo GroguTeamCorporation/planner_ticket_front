@@ -53,9 +53,12 @@ const registerUser = async () => {
   }
 };
 
+
+
 onMounted(() => {
   registerUser();
 });
+
 </script>
 
 <style scoped>

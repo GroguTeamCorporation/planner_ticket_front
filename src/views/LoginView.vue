@@ -21,33 +21,42 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
+
+
+
+
 
 export default {
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
+      username:'',
+      isSubmitting: false,
     };
   },
   methods: {
     async login() {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/login', {
-          auth: {
-            username: this.username,
-            password: this.password,
-          }
+        this.isSubmitting = true;
+        const response = await axios.post('http://localhost:8080/api/v1/login', {
+          email: this.email,
+          password: this.password,
         });
         console.log(response.data);
       } catch (error) {
         console.error('Error:', error);
       }
+      finally {
+        this.isSubmitting = false;
+      }
     },
   },
 };
 </script>
+
 
 <style scoped>
 .error-message {
@@ -83,7 +92,7 @@ export default {
   width: 450px;
   height: 520px;
   margin:auto;
-  margin-top: 12%;
+  margin-top: 6%;
   padding: 5px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(250, 247, 247, 0.1);
