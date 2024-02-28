@@ -8,7 +8,19 @@
       MDBCollapse
     } from 'mdb-vue-ui-kit';
   import { ref } from 'vue';
+  import axios from 'axios';
+
   const collapse1 = ref(false);
+
+  const userLogout = async () => {
+    try {
+      await axios.get('http://localhost:8080/api/v1/logout', {
+        withCredentials: true
+      });
+    } catch (error) {
+      console.error('Ha ocurrido un error durante el logout: ', error);
+    }
+  }
 </script>
 <template>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -36,7 +48,7 @@
           <RouterLink class="nav-link" to="/admin">Admin</RouterLink>
         </MDBNavbarItem>
         <MDBNavbarItem to="#">
-          <RouterLink class="nav-link" to="/logout">Logout</RouterLink>
+          <RouterLink class="nav-link" to="/" @click="userLogout">Logout</RouterLink>
         </MDBNavbarItem>
       </MDBNavbarNav>
     </MDBCollapse>
