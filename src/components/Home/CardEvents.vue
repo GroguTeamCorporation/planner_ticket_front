@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useEventsStore } from "../../stores/eventsStore";
 import { useListUsStore } from '../../stores/listUsStore';
+import { useImageStore } from '../../stores/imagesStore';
 
 
 const eventsStore = useEventsStore();
@@ -10,6 +11,7 @@ const router = useRouter();
 const itemsPerPage = 3;
 const currentPage = ref(1);
 const allEvents = computed(() => eventsStore.allEvents);
+const imageStore = useImageStore();
 
 const paginatedEvents = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage;
@@ -34,15 +36,26 @@ fetchEvents();
 
 const listUsStore = useListUsStore();
 
-
-const sendAddList = (event: Event) => {
-  if (event) {
-    listUsStore.sendAddList(event);
+const sendAddList = async (eventData: any) => {
+  if (eventData) {
+    console.log('Event data:', eventData);
+    try {
+      await listUsStore.sendAddList(eventData);
+      // Redirigir al usuario a la lista de eventos después de añadir el evento
+      router.push('/list');
+    } catch (error) {
+      console.error('Error al añadir el evento:', error);
+    }
   } else {
     console.error('El evento es undefined');
   }
-};
 
+};
+// Llama a fetchImage para cada evento cuando se cargan los eventos
+watchEffect(() => {
+ allEvents.value.forEach((event) => {
+    imageStore.fetchImage(event.image);
+ });});
 </script>
 <template>
   <div class="events">
@@ -53,7 +66,7 @@ const sendAddList = (event: Event) => {
         class="event-card"
       >
         <!-- <img :src="event.image" :alt="event.title" /> -->
-        <img :src="`/api/v1/images/${event.image}`" :alt="event.title">
+        <img :src="imageStore.images[event.image]" :alt="event.title">
         
         <div class="info-card">
           <h3>{{ event.title }}</h3>
@@ -63,7 +76,7 @@ const sendAddList = (event: Event) => {
           <h5>Aforo: {{ event.capacity }}</h5>
           <h5>Ubicación: {{ event.location }}</h5>
      
-          <button type="button" class="btn btn-secondary" @click="sendAddList(event.id)">Añadir</button>
+          <button type="button" class="btn btn-secondary" @click="() => { console.log(event); sendAddList(event); }">Añadir</button>
         </div>
       </div>
       <nav aria-label="page" class="page">

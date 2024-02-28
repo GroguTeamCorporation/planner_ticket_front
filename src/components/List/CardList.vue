@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useListUsStore } from '../../stores/listUsStore';
-
+import { useImageStore } from '../../stores/imagesStore';
 
 const listUsStore = useListUsStore();
 const router = useRouter();
 const itemsPerPage = 3;
 const currentPage = ref(1);
 const allEvents = computed(() => listUsStore.allEvents);
-
+const imageStore = useImageStore();
 const paginatedEvents = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage;
   const endIndex = currentPage.value * itemsPerPage;
@@ -29,6 +29,13 @@ const fetchEvents = async () => {
 };
 
 fetchEvents();
+
+watchEffect(() => {
+ allEvents.value.forEach((event) => {
+    imageStore.fetchImage(event.image);
+ });
+ console.log(imageStore.images); // Agrega esta línea para depurar
+});
 </script>
 
 <template>
@@ -39,7 +46,7 @@ fetchEvents();
         :key="event.id"
         class="event-card"
       >
-      <div class="col-md-4"> <img :src="event.image" :alt="event.title" class="img-fluid rounded-start"/></div>
+      <img :src="imageStore.images[event.image]" :alt="event.title" class="img-fluid rounded-start">
       <div class="col-md-12">
         <div class="info-card">
           <h3>{{ event.title }}</h3>
