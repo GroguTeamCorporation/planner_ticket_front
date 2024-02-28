@@ -22,23 +22,10 @@
               <div class="m-3">
                 <label for="time" class="form-label">Hora</label>
                 <input type="text" class="form-control" id="time" v-model="formData.time" @input="handleTimeInput" :class="{ 'is-invalid': timeErrorMessage }" required>
-              </div>
-              <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true" :class="{ 'show': timeErrorMessage !== '' }">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Error en el formato de la hora</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <p>{{ timeErrorMessage }}</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                  </div>
+                <div v-if="timeErrorMessage" class="invalid-feedback">
+                  {{ timeErrorMessage }}
                 </div>
               </div>
-            </div>
               <div class="m-3">
                 <label for="capacity" class="form-label">Entradas disponibles</label>
                 <input v-model="formData.capacity" type="number" class="form-control" id="capacity" required />
@@ -54,11 +41,12 @@
                 <input type="file" class="form-control" id="image" @change="handleImageChange" required/>
               </div>
             </div>
+
             <div class="col-md-2 mt-5">
               <div  class="d-flex flex-column align-items-center">
                 <button type="button" class="buttonForm" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="buttonForm" @click="clearForm">Borrar</button>
-                <button type="submit" class="buttonForm"  data-bs-dismiss="modal">Guardar</button>
+                <button type="submit" class="buttonForm">Guardar</button>
               </div>
             </div>
           </form>
@@ -74,18 +62,19 @@
               <img :src="event.image || ''" alt="Imagen del evento" class="img-fluid"  />
             </div>
           </div>
+
         </div>
       </div>
     </div>
     </div>  
-  </template>  
+  </template>
   
   <script setup lang="ts">
-
   import axios from 'axios';
-  import { watchEffect, ref, type Ref } from 'vue';
+  import { ref, type Ref } from 'vue';
   import type { Event} from '@/interfaces/EventInterface';
-  import { useEventsStore } from "@/stores/eventsStore";  
+  import { useEventsStore } from "@/stores/eventsStore";
+  
 
   interface FormData {
     title: string;
@@ -123,18 +112,18 @@ const addEvent = async () => {
         }
       });
 
-      const imageName = imageResponse.data.split('.')[0];
+      const imageName = imageResponse.data;  
 
       const eventData = {
         ...formData.value,
-        image: imageName
+        image: '/images/' + imageName
       };
 
       const eventResponse = await axios.post('http://localhost:8080/api/v1/events', eventData);
      
-      await eventsStore.fetchEvents();          
-      allEvents.value = eventsStore.allEvents;
-      //router.push('/admin');
+      await eventsStore.fetchEvents();
+
+      // allEvents.value = eventsStore.allEvents;
           
       clearForm();
       $('#exampleModal').modal('hide');
@@ -146,6 +135,7 @@ const addEvent = async () => {
     console.error('Error al enviar los datos al servidor:', error.message);
   }
 };
+
 
 const handleImageChange = (event: any) => {
   console.log('Imagen seleccionada:', event.target.files[0]);
@@ -162,21 +152,17 @@ formData.value.description = '';
 formData.value.image = null;
 };
 
-const showErrorModal = () => {
-    $('#errorModal').modal('show');
-  };
+const handleTimeInput = () => {
+  const regex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+  if (!regex.test(formData.value.time)) {    
+    timeErrorMessage.value = 'Formato de hora no válido (00:00)';
+  } else {
+    timeErrorMessage.value = '';
+  }
+};
 
-  const handleTimeInput = () => {
-    const regex = /^([01]\d|2[0-3]):([0-5]\d)$/;
-    if (!regex.test(formData.value.time)) {
-      timeErrorMessage.value = 'Formato de hora no válido (00:00)';
-      showErrorModal();
-    } else {
-      timeErrorMessage.value = '';
-    }
-  };
   </script>
-
+  
   <style scoped lang="scss">
   @import '../assets/admin.scss';
   </style>

@@ -18,11 +18,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'mdb-vue-ui-kit/css/mdb.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
+import { MDBModal } from 'mdb-vue-ui-kit'; 
+
+
 const app = createApp(App)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(createPinia())
 app.use(router)
-
+app.component('mdb-modal', MDBModal);
 
 app.mount('#app')
