@@ -16,5 +16,21 @@
     .navbar-toggler{
       color: aliceblue;
     }
+    .navbar {
+        display: flex;
+        justify-content: flex-end;
+       }
+       @media (min-width: 992px) { /* Ajusta este valor según el punto de interrupción de tu diseño */
+        .navbar .dropdown-menu {
+           justify-content: center;
+           width: 100%; /* Ajusta el ancho según sea necesario */
+        }
+       }
+       .navbar .dropdown-menu {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+       }
 }
 
