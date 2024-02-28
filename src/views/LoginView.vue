@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-// TuComponente.vue
+
 import axios from 'axios';
 import { useAuthStore } from '@/stores/authStore'; 
 import router from '@/router/index'
@@ -96,7 +96,7 @@ export default {
 
 .logo {
   width: 25%;
-  margin-left: 35%;
+  margin-left: 38%;
   margin-top: 5%;
 }
 
@@ -105,7 +105,7 @@ export default {
   width: 450px;
   height: 520px;
   margin: auto;
-  margin-top: 12%;
+  margin-top: 2%;
   padding: 5px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(250, 247, 247, 0.1);
@@ -136,8 +136,8 @@ export default {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  width: 30%;
-  margin-left: 35%;
+  width: 40%;
+  margin-left: 30%;
   margin-top: 5%;
   transition: 0.3s;
   font-family: 'fuente';

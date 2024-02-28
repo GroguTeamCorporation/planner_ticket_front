@@ -2,9 +2,8 @@
 import { computed, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useEventsStore } from "../../stores/eventsStore";
-import { useListUsStore } from '../../stores/listUsStore';
-import { useImageStore } from '../../stores/imagesStore';
-
+import { useListUsStore } from "../../stores/listUsStore";
+import { useImageStore } from "../../stores/imagesStore";
 
 const eventsStore = useEventsStore();
 const router = useRouter();
@@ -33,63 +32,52 @@ const fetchEvents = async () => {
 
 fetchEvents();
 
-
 const listUsStore = useListUsStore();
 
 const sendAddList = async (eventData: any) => {
   if (eventData) {
-    console.log('Event data:', eventData);
     try {
       await listUsStore.sendAddList(eventData);
-      // Redirigir al usuario a la lista de eventos después de añadir el evento
-      router.push('/list');
+
+      router.push("/list");
     } catch (error) {
-      console.error('Error al añadir el evento:', error);
+      console.error("Error al añadir el evento:", error);
     }
   } else {
-    console.error('El evento es undefined');
+    console.error("El evento es undefined");
   }
-
 };
-// Llama a fetchImage para cada evento cuando se cargan los eventos
+
 watchEffect(() => {
- allEvents.value.forEach((event) => {
+  allEvents.value.forEach((event) => {
     imageStore.fetchImage(event.image);
- });});
+  });
+});
 </script>
 <template>
   <div class="events">
-    <div class="events-cards">
-      <div
-        v-for="(event, index) in paginatedEvents"
-        :key="event.id"
-        class="event-card"
-      >
-        <!-- <img :src="event.image" :alt="event.title" /> -->
-        <img :src="imageStore.images[event.image]" :alt="event.title">
-        
-        <div class="info-card">
-          <h3>{{ event.title }}</h3>
-          <h5>Descripción: {{ event.description }}</h5>
-          <h5>Fecha: {{ event.date }}</h5>
-          <h5>Hora: {{ event.time }}</h5>
-          <h5>Aforo: {{ event.capacity }}</h5>
-          <h5>Ubicación: {{ event.location }}</h5>
-     
-          <button type="button" class="btn btn-secondary" @click="() => { console.log(event); sendAddList(event); }">Añadir</button>
+      <div class="events-cards">
+        <div v-for="(event, index) in paginatedEvents" :key="event.id" class="event-card">
+          <img :src="imageStore.images[event.image]" :alt="event.title" />
+          <div class="info-card">
+            <h3>{{ event.title }}</h3>
+            <h5>Descripción: {{ event.description }}</h5>
+            <h5>Fecha: {{ event.date }}</h5>
+            <h5>Hora: {{ event.time }}</h5>
+            <h5>Aforo: {{ event.capacity }}</h5>
+            <h5>Ubicación: {{ event.location }}</h5>
+            <button type="button" class="btn btn-secondary" @click="() => {
+              console.log(event);
+              sendAddList(event);
+            }"> Añadir
+            </button>
+          </div>
         </div>
-      </div>
+        <div>
       <nav aria-label="page" class="page">
-        <ul
-          class="pagination active pagination-lg justify-content-center"
-          aria-current="page"
-        >
+        <ul class="pagination active pagination-lg justify-content-center" aria-current="page">
           <li class="page-item" :class="{ disabled: currentPage === 1 }">
-            <button
-              class="page-link"
-              @click="changePage(currentPage - 1)"
-              :disabled="currentPage === 1"
-            >
+            <button class="page-link" @click="changePage(currentPage - 1)" :disabled="currentPage === 1">
               <i class="bi bi-arrow-left"></i>
             </button>
           </li>
@@ -99,24 +87,22 @@ watchEffect(() => {
             </button>
           </li>
           <li class="page-item" :class="{ disabled: currentPage === pages }">
-            <button
-              class="page-link"
-              @click="changePage(currentPage + 1)"
-              :disabled="currentPage === pages"
-            >
+            <button class="page-link" @click="changePage(currentPage + 1)" :disabled="currentPage === pages">
               <i class="bi bi-arrow-right"></i>
             </button>
           </li>
         </ul>
       </nav>
     </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 .events {
-margin-top: 5rem;
+  margin-top: 5rem;
   height: 60%;
+
   .events-cards {
     display: flex;
     flex-wrap: wrap;
@@ -124,25 +110,28 @@ margin-top: 5rem;
     gap: 3rem;
     color: white;
     font-size: 1rem;
+
     .event-card {
       font-size: 1rem;
       margin: 1rem;
       padding: 1rem;
       text-align: center;
       background-color: rgba(0, 0, 0, 0.8);
-
       width: 24rem !important;
       font-size: 100%;
+     height: 29rem;
 
       img {
         width: 15rem;
         height: 10rem;
         cursor: pointer;
       }
+
       .info-card {
         padding: 1rem;
         margin: -1rem;
         margin-top: 1rem;
+
         button {
           font-size: 1rem;
           display: inline-block;
@@ -152,9 +141,13 @@ margin-top: 5rem;
       }
     }
   }
-}
-.page {
+
+  .page {
   margin-bottom: 10rem;
-  margin-top: 1rem;
+  margin-top: 5rem;
 }
+
+}
+
+
 </style>

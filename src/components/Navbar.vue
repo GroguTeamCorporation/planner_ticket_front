@@ -19,7 +19,7 @@
       target="#navbarSupportedContent"
     ></MDBNavbarToggler>
     <MDBCollapse v-model="collapse1" id="navbarSupportedContent" class="icono">
-      <MDBNavbarNav class="mb-2 mb-lg-0">
+      <MDBNavbarNav right class="mb-2 mb-lg-0">
         <MDBNavbarItem to="#" active>
           <RouterLink class="nav-link" to="/">Home</RouterLink>
         </MDBNavbarItem>
@@ -45,4 +45,5 @@
 <style scoped lang="scss">
     @import '../assets/Navbar.scss';
     @import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
+    
 </style>
