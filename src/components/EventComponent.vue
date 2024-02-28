@@ -123,11 +123,11 @@ const addEvent = async () => {
         }
       });
 
-      const imageName = imageResponse.data;  
+      const imageName = imageResponse.data.split('.')[0];
 
       const eventData = {
         ...formData.value,
-        image: '/images/' + imageName
+        image: imageName
       };
 
       const eventResponse = await axios.post('http://localhost:8080/api/v1/events', eventData);

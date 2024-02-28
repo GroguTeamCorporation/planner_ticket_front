@@ -51,10 +51,7 @@
   };
   </script>
   
-  <style scoped>
-  /* Estilos existentes */
-  </style>
- 
+
  <style scoped>
  @font-face {
   font-family: 'fuente';
