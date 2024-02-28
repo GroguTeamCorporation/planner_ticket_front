@@ -1,5 +1,7 @@
 export interface IRegisterUser{
-    username: string
-    role: string
-    isAuthenticated: boolean
-  }
+  username: string;
+  email: string;
+  password: string;
+  role: string; 
+  isAuthenticated: boolean; 
+}

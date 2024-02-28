@@ -1,87 +1,84 @@
 <template>
-  <div id="main-container">
-    <div class="login-container">
-      <img class="logo" :src="'/src/assets/images/logo 1.png'" />
+   <div id="main-container">
+       <div class="login-container">
+         <img class="logo" :src="'/src/assets/images/logo 1.png'" />
+  
+         <form class="login-form" @submit.prevent="registerUser">
+           <label class="label" for="username">Nombre de usuario:</label>
+           <input class="input-field" type="text" v-model="username" required />
+  
+           <label class="label" for="email">Email:</label>
+           <input class="input-field" type="email" v-model="email" required />
+  
+           <label class="label" for="password">Contraseña:</label>
+           <input class="input-field" type="password" v-model="password" required />
+  
+           <button class="login-button" type="submit">Aceptar</button>
+         </form>
+       </div>
+   </div>
+  </template>
+  
+  <script setup lang="ts">
+  import { ref, onMounted } from 'vue';
+  import axios from 'axios';
+  import type { IRegisterUser } from '@/models/IRegisterUser'; 
 
-      <form class="login-form" @submit.prevent="registerUser">
-        <label class="label" for="nombre">Nombre:</label>
-        <input class="input-field" type="text" v-model="nombre" required />
-
-        <label class="label" for="email">Email:</label>
-        <input class="input-field" type="email" v-model="email" required />
-
-        <label class="label" for="password">Contraseña:</label>
-        <input class="input-field" type="password" v-model="password" required />
-
-        <button class="login-button" type="submit">Aceptar</button>
-      </form>
-    </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-
-interface User {
-  nombre: string;
-  email: string;
-  password: string;
-}
-
-const nombre = ref('');
-const email = ref('');
-const password = ref('');
-const isSubmitting = ref(false);
-
-const registerUser = async () => {
-  isSubmitting.value = true;
-
-  const data: User = {
-    nombre: nombre.value,
-    email: email.value,
-    password: password.value
+  const username = ref('');
+  const email = ref('');
+  const password = ref('');
+  const isSubmitting = ref(false);
+  
+  const registerUser = async () => {
+   isSubmitting.value = true;
+  
+   const data: IRegisterUser = {
+      username: username.value,
+      email: email.value,
+      password: password.value,
+      role: 'ROLE_USER', 
+      isAuthenticated: false,
+   };
+  
+   try {
+      const response = await axios.post('http://localhost:8080/api/v1/users', data);
+      console.log('Usuario registrado exitosamente:', response.data);
+   } catch (error) {
+      console.error('Error al registrar usuario:', error);
+   } finally {
+      isSubmitting.value = false;
+   }
   };
-
-  try {
-    const response = await axios.post('http://localhost:8080/api/v1/users', data);
-    console.log('Usuario registrado exitosamente:', response.data);
-  } catch (error) {
-    console.error('Error al registrar usuario:', error);
-  } finally {
-    isSubmitting.value = false;
-  }
-};
-
-onMounted(() => {
-  registerUser();
-});
-</script>
-
-<style scoped>
-@font-face {
+  </script>
+  
+  <style scoped>
+  /* Estilos existentes */
+  </style>
+ 
+ <style scoped>
+ @font-face {
   font-family: 'fuente';
   src: url('../assets/fonts/Peralta-Regular.ttf');
   font-weight: normal;
   font-style: normal;
-}
-
-#main-container {
+ }
+ 
+ #main-container {
   background-image: url('/src/assets/images/fondo-loginview.png');
   background-size: cover;
   background-position: center;
   margin: 0;
   height: 100vh;
   overflow: hidden;
-}
-
-.logo {
+ }
+ 
+ .logo {
   width: 25%;
   margin-left: 35%;
   margin-top: 5%;
-}
-
-.login-container {
+ }
+ 
+ .login-container {
   width: 450px;
   height: 520px;
   margin: auto;
@@ -91,22 +88,22 @@ onMounted(() => {
   box-shadow: 0 0 10px rgba(250, 247, 247, 0.1);
   background: rgb(58, 58, 57);
   opacity: 0.9;
-}
-
-.login-form {
+ }
+ 
+ .login-form {
   display: flex;
   flex-direction: column;
   padding: 20px;
-}
-
-.input-field {
+ }
+ 
+ .input-field {
   margin-bottom: 30px;
   padding: 8px;
   border: 2px solid #2a5381;
   border-radius: 6px;
-}
-
-.login-button {
+ }
+ 
+ .login-button {
   background-color: white;
   color: black;
   padding: 10px;
@@ -118,40 +115,35 @@ onMounted(() => {
   margin-top: 5%;
   transition: 0.3s;
   font-family: 'fuente';
-}
-
-.login-button:hover {
+ }
+ 
+ .login-button:hover {
   background-color: #2a5381;
   color: white;
-}
-.label {
+ }
+ 
+ .label {
   color: whitesmoke;
-}
-@media screen and (max-width: 600px) {
+ }
+ 
+ @media screen and (max-width: 600px) {
   .logo {
-    width: 40%;
-    margin-top: 20%;
+     width: 40%;
+     margin-top: 20%;
   }
   .login-container{
-    width: 80%;
-    margin-top: 25%;
+     width: 80%;
+     margin-top: 25%;
   }
   .login-form{
-    padding: 1px;
+     padding: 1px;
   }
   .input-field{
-    margin-bottom: 15px;
+     margin-bottom: 15px;
   }
   .login-button{
-    width: 70%;
-    margin-left: 10%;
+     width: 70%;
+     margin-left: 10%;
   }
-
-
-}
-
-
-</style>
-
-
-
+ }
+ </style>
