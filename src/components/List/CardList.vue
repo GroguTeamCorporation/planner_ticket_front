@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
-import { useListUsStore } from '../../stores/listUsStore';
-import { useImageStore } from '../../stores/imagesStore';
+import { useListUsStore } from "../../stores/listUsStore";
+import { useImageStore } from "../../stores/imagesStore";
 
 const listUsStore = useListUsStore();
 const router = useRouter();
@@ -31,10 +31,9 @@ const fetchEvents = async () => {
 fetchEvents();
 
 watchEffect(() => {
- allEvents.value.forEach((event) => {
+  allEvents.value.forEach((event) => {
     imageStore.fetchImage(event.image);
- });
- console.log(imageStore.images); // Agrega esta línea para depurar
+  });
 });
 </script>
 
@@ -46,11 +45,15 @@ watchEffect(() => {
         :key="event.id"
         class="event-card"
       >
-      <img :src="imageStore.images[event.image]" :alt="event.title" class="img-fluid rounded-start">
-      <div class="col-md-12">
-        <div class="info-card">
-          <h3>{{ event.title }}</h3>
-          <h5>{{ event.date }}</h5>
+        <img
+          :src="imageStore.images[event.image]"
+          :alt="event.title"
+          class="img-fluid rounded-start"
+        />
+        <div class="col-md-12">
+          <div class="info-card">
+            <h3>{{ event.title }}</h3>
+            <h5>{{ event.date }}</h5>
           </div>
         </div>
       </div>
@@ -89,9 +92,8 @@ watchEffect(() => {
 </template>
 
 <style lang="scss">
-
 .events {
-margin-top: 5rem;
+  margin-top: 5rem;
   height: 40%;
   .events-cards {
     display: flex;

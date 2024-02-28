@@ -31,7 +31,7 @@ export const useListUsStore = defineStore({
    
       
     async sendAddList(event: Event) {
-      console.log('Evento recibido en sendAddList:', event);
+      
       try {
         const token = localStorage.getItem('access_token');
         const payload: EventPayload = {
@@ -44,7 +44,7 @@ export const useListUsStore = defineStore({
           time: event.time,
           image: event.image,
         };
-        console.log('Payload a enviar:', payload);
+        
         const response = await axios.post<EventResponse>('http://localhost:8080/api/v1/list_us', payload, {
           headers: {
             'Authorization': `Bearer ${token}`,
