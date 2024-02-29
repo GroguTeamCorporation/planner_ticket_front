@@ -2,13 +2,6 @@
     font-family: 'peralta';
     background-color: #1C2321;
 
-    .nav-item{
-        margin-left: 5%;
-    }
-    
-    .navbar-collapse ul{
-        margin-left: 40%;
-    }
 
     .nav-link{
         color: white;
@@ -20,5 +13,24 @@
     span{
         color: white;
     }
-    
+    .navbar-toggler{
+      color: aliceblue;
+    }
+    .navbar {
+        display: flex;
+        justify-content: flex-end;
+       }
+       @media (min-width: 992px) { /* Ajusta este valor según el punto de interrupción de tu diseño */
+        .navbar .dropdown-menu {
+           justify-content: center;
+           width: 100%; /* Ajusta el ancho según sea necesario */
+        }
+       }
+       .navbar .dropdown-menu {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+       }
 }
+

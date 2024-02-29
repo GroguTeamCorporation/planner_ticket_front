@@ -1,42 +1,61 @@
 <script setup lang="ts">
-  
+    import {
+      MDBNavbar,
+      MDBNavbarToggler,
+      MDBNavbarBrand,
+      MDBNavbarNav,
+      MDBNavbarItem,
+      MDBCollapse
+    } from 'mdb-vue-ui-kit';
+  import { ref } from 'vue';
+  import axios from 'axios';
+
+  const collapse1 = ref(false);
+
+  const userLogout = async () => {
+    try {
+      await axios.get('http://localhost:8080/api/v1/logout', {
+        withCredentials: true
+      });
+    } catch (error) {
+      console.error('Ha ocurrido un error durante el logout: ', error);
+    }
+  }
 </script>
-
 <template>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="../assets/img/logo.png" alt="" width="150" height="100"></a>
-      <button class="navbar-toggler text-bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" data-bs-theme="dark">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/">Home</RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/login">Login</RouterLink>
-          </li>
-          <li class="nav-item dropdown">
-            <RouterLink class="nav-link" to="/register">Register</RouterLink>
-            
-          </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/list">List</RouterLink>
-          </li>
-
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/admin">Admin</RouterLink>
-          </li>
-        </ul>
-      </div>
-   </div>
-  </nav>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <MDBNavbar expand="lg" container class="navbar">
+    <MDBNavbarBrand href="#"><img src="../assets/img/logo.png" alt="" width="150" height="100"></MDBNavbarBrand>
+    <MDBNavbarToggler
+      @click="collapse1 = !collapse1"
+      target="#navbarSupportedContent"
+    ></MDBNavbarToggler>
+    <MDBCollapse v-model="collapse1" id="navbarSupportedContent" class="icono">
+      <MDBNavbarNav right class="mb-2 mb-lg-0">
+        <MDBNavbarItem to="#" active>
+          <RouterLink class="nav-link" to="/">Home</RouterLink>
+        </MDBNavbarItem>
+        <MDBNavbarItem href="#">
+          <RouterLink class="nav-link" to="/login">Login</RouterLink>
+        </MDBNavbarItem>
+        <MDBNavbarItem to="#">
+          <RouterLink class="nav-link" to="/register">Register</RouterLink>
+        </MDBNavbarItem>
+        <MDBNavbarItem to="#">
+          <RouterLink class="nav-link" to="/list">List</RouterLink>
+        </MDBNavbarItem>
+        <MDBNavbarItem to="#">
+          <RouterLink class="nav-link" to="/admin">Admin</RouterLink>
+        </MDBNavbarItem>
+        <MDBNavbarItem to="#">
+          <RouterLink class="nav-link" to="/" @click="userLogout">Logout</RouterLink>
+        </MDBNavbarItem>
+      </MDBNavbarNav>
+    </MDBCollapse>
+  </MDBNavbar>
 </template>
-
-
 <style scoped lang="scss">
     @import '../assets/Navbar.scss';
     @import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
+    
 </style>

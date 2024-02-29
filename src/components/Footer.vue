@@ -1,9 +1,11 @@
 <script setup lang="ts">
 
   import 'bootstrap-icons/font/bootstrap-icons.css';
+
+  import 'bootstrap-icons/font/bootstrap-icons.css';
 </script>
 <template>
-    <footer class="text-white-50 text-center text-lg-start position-fixed bottom-0 w-100">
+    <footer class="text-white-50 text-center text-lg-start mt-5 position-fixed bottom-0 w-100">
      <div class="container p-1 pb-0">
       <div class="row-auto d-flex justify-content-between align-items-center">
            <div>
@@ -33,5 +35,7 @@
 
   <style scoped  lang="scss">
     @import '../assets/footer.scss';
+
   </style>
+
 

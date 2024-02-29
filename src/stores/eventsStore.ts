@@ -5,6 +5,7 @@ import type { Event } from '@/interfaces/EventInterface';
 import axios from 'axios';
 import router from '@/router';
 
+
 export const useEventsStore = defineStore({
   id: 'eventsStore',
   state: () => ({
@@ -32,4 +33,5 @@ export const useEventsStore = defineStore({
     },
   },
 });
+
 

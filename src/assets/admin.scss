@@ -1,0 +1,60 @@
+#containerBtn{
+    text-align: center;        
+    #addbtn{    
+        background-color: #7D98A1;
+    }    
+    
+    .form-label, .form-label {
+        padding: 5px;
+    }    
+}
+    #image {
+        height: 200px; 
+        width: 200px;
+    }
+
+.buttonForm {
+    margin: 15px;
+    border-radius: 8px;
+    background-color: #EEF1EF; 
+    color: black;
+    border: none;
+    height: 30px;
+    width: 100px;
+}
+
+@media  (max-width: 991px) {
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .modal-body .col-md-6 {
+      width: 100%;
+    }
+  
+    .modal-body .col-md-4 {
+      width: 100%;
+      margin-top: 1px; 
+    }
+    
+    .modal-body .col-md-2 {
+      width: 100%;
+    }
+
+    #image {
+        height: 100px; 
+        width: 100%;
+    }
+
+    .form-label, .form-label {
+        padding: 2px;
+    }
+    .buttonForm {
+        margin-top: 0;
+    }
+
+    #addbtn {
+        margin-top: 15px;
+    }
+  }
