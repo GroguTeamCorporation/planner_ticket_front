@@ -24,13 +24,24 @@
 <script lang="ts">
 
 import axios from 'axios';
+
+
+
+
+
+
+
+import axios from 'axios';
 import { useAuthStore } from '@/stores/authStore'; 
 import router from '@/router/index'
+
 export default {
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
+      username:'',
+      isSubmitting: false,
     };
   },
   created() {
@@ -40,11 +51,10 @@ export default {
     async login() {
       const authStore = useAuthStore(); 
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/login', {
-          auth: {
-            username: this.username,
-            password: this.password,
-          }
+        this.isSubmitting = true;
+        const response = await axios.post('http://localhost:8080/api/v1/login', {
+          email: this.email,
+          password: this.password,
         });
         console.log(response.data);
         authStore.username.isAuthenticated = response.data.isAuthenticated;
@@ -60,6 +70,9 @@ export default {
       } catch (error) {
         console.error('Error:', error);
       }
+      finally {
+        this.isSubmitting = false;
+      }
     },
   },
 };
@@ -70,6 +83,10 @@ export default {
 .error-message {
   color: red;
 }
+
+
+@font-face{
+
 </style>
 
 
@@ -77,6 +94,7 @@ export default {
 
 <style scoped>
 @font-face {
+
   font-family: 'fuente';
   src: url('../assets/fonts/Peralta-Regular.ttf');
   font-weight: normal;
@@ -104,8 +122,13 @@ export default {
 
   width: 450px;
   height: 520px;
+
+  margin:auto;
+  margin-top: 6%;
+
   margin: auto;
   margin-top: 2%;
+
   padding: 5px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(250, 247, 247, 0.1);

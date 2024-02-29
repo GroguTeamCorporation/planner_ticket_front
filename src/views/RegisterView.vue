@@ -52,8 +52,30 @@
   </script>
   
 
+  try {
+    const response = await axios.post('http://localhost:8080/api/v1/users', data);
+    console.log('Usuario registrado exitosamente:', response.data);
+  } catch (error) {
+    console.error('Error al registrar usuario:', error);
+  } finally {
+    isSubmitting.value = false;
+  }
+};
+
+
+
+onMounted(() => {
+  registerUser();
+});
+
+</script>
+
+<style scoped>
+@font-face {
+
  <style scoped>
  @font-face {
+
   font-family: 'fuente';
   src: url('../assets/fonts/Peralta-Regular.ttf');
   font-weight: normal;
@@ -79,7 +101,11 @@
   width: 450px;
   height: 520px;
   margin: auto;
+
+  margin-top: 4%;
+
   margin-top: 2%;
+
   padding: 5px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(250, 247, 247, 0.1);

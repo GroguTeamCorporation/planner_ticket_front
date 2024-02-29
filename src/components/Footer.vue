@@ -9,7 +9,7 @@
      <div class="container p-1 pb-0">
       <div class="row-auto d-flex justify-content-between align-items-center">
            <div>
-             <a href="#" class="me-4 text-reset" target="_blank">
+             <a href="https://open.spotify.com/intl-es?" class="me-4 text-reset" target="_blank">
               <i class="bi bi-spotify"></i>
              </a>
              <a href="https://www.tiktok.com" class="me-4 text-reset" target="_blank" >
@@ -21,7 +21,7 @@
              <a href="https://www.instagram.com" class="me-4 text-reset" target="_blank">
                <i class="bi bi-instagram"></i>
              </a>
-             <a href="https://www.instagram.com" class="me-4 text-reset" target="_blank">
+             <a href="https://discord.com/" class="me-4 text-reset" target="_blank">
               <i class="bi bi-discord"></i>
              </a>
            </div>
@@ -37,7 +37,5 @@
     @import '../assets/footer.scss';
 
   </style>
-
-
 
 

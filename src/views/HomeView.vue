@@ -1,20 +1,30 @@
 <script setup lang="ts">
 
 import CardEvents from '@/components/Home/CardEvents.vue';
+import  Slider from '../components/Slider.vue';
+
+
+import CardEvents from '@/components/Home/CardEvents.vue';
 import  Slider from '../components/Slider.vue'
 
 
 
-</script>
 
+</script>
 <template>
-  <main>
+ <main>
     
     <Slider/>
     <CardEvents />
   </main>
+  </template>
+
+
+
+
 
 </template>
+
 
 <style type="text/css">
 
@@ -22,6 +32,8 @@ body{
   background-image: url(/src/assets/img/concert6.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
+    
 
 }
 </style>
